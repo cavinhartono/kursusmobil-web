@@ -20,42 +20,47 @@ Anggota:
   </thead>
   <tbody>
     <tr>
-      <td><input type="checkbox" checked disabled/></td>
+      <td>&check;</td>
       <td>Login dan Register</td>
       <td>-</td>
     </tr>
     <tr>
-      <td><input type="checkbox" disabled/></td>
+      <td>-</td>
       <td>Sistem Pembayaran (Transfer Only)</td>
       <td>-</td>
     </tr>
     <tr>
-      <td><input type="checkbox" disabled/></td>
+      <td>-</td>
+      <td>Ujian Teori</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>-</td>
       <td>Sistem Penjadwalan</td>
       <td>-</td>
     </tr>
     <tr>
-      <td><input type="checkbox" disabled/></td>
+      <td>-</td>
       <td>Sistem Pembayaran (Transfer Only)</td>
       <td>-</td>
     </tr>
     <tr>
-      <td><input type="checkbox" disabled/></td>
+      <td>-</td>
       <td>Sertifikat</td>
       <td>-</td>
     </tr>
     <tr>
-      <td><input type="checkbox" disabled/></td>
+      <td>-</td>
+      <td>Sistem Penilaian berdasarkan Nilai Ujian</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>-</td>
       <td>Roles</td>
       <td>`Admin`, `Instruktur` dan `Siswa`</td>
     </tr>
     <tr>
-      <td><input type="checkbox" disabled/></td>
-      <td>Roles</td>
-      <td>`Instruktur` dan `Calon Pemgemudi`</td>
-    </tr>
-    <tr>
-      <td><input type="checkbox" disabled/></td>
+      <td>-</td>
       <td>Responsive</td>
       <td>-</td>
     </tr>
@@ -75,10 +80,34 @@ Anggota:
   </thead>
   <tbody>
     <tr>
-      <td>CRUD (Students, Instructors dan Courses)</td>
-      <td><input type="checkbox" checked disabled/></td>
+      <td>CRUD (Students dan Instructors)</td>
+      <td>&check;</td>
       <td>-</td>
       <td>-</td>
+    </tr>
+    <tr>
+      <td>CRUD (Courses dan Cars)</td>
+      <td>-</td>
+      <td>&check;</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>Menentukan Nilai Ujian Praktek</td>
+      <td>-</td>
+      <td>&check;</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>Enroll</td>
+      <td>-</td>
+      <td>-</td>
+      <td>&check;</td>
+    </tr>
+    <tr>
+      <td>Kuis</td>
+      <td>-</td>
+      <td>-</td>
+      <td>&check;</td>
     </tr>
   </tbody>
 </table>
