@@ -39,3 +39,11 @@ CREATE TABLE enrollments (
     FOREIGN KEY (instructor_id) REFERENCES instructors (id)
 );
 
+# Tambahkan kolom `car_id` pada `enrollments`
+
+CREATE TABLE cars (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    transmission ENUM('manual', "automatic") NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)
