@@ -46,4 +46,17 @@ CREATE TABLE cars (
     name VARCHAR(50) NOT NULL,
     transmission ENUM('manual', "automatic") NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-)
+);
+
+CREATE TABLE certifications (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    generate_code VARCHAR(50),
+    student_id INT NOT NULL,
+    course_id INT NOT NULL,
+    instructor_id INT NOT NULL,
+    date_of_issue DATE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (student_id) REFERENCES students (id),
+    FOREIGN KEY (course_id) REFERENCES courses (id),
+    FOREIGN KEY (instructor_id) REFERENCES instructors (id)
+);
