@@ -38,3 +38,4 @@ CREATE TABLE enrollments (
     FOREIGN KEY (course_id) REFERENCES courses (id),
     FOREIGN KEY (instructor_id) REFERENCES instructors (id)
 );
+
