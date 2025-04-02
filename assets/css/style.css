@@ -1,0 +1,165 @@
+@import "./responsive.css";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter Tight", sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: row;
+  background: #e7e7e7;
+}
+
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background: #fff;
+  padding: 20px;
+  position: fixed;
+  transition: width 0.3s;
+  overflow: hidden;
+}
+
+.sidebar.collapsed {
+  width: 60px;
+  padding: 20px 10px;
+}
+
+.sidebar.collapsed:hover {
+  width: 250px;
+  padding: 20px;
+}
+
+.sidebar.collapsed:hover h3,
+.sidebar.collapsed:hover a,
+.sidebar.collapsed:hover .dropdown {
+  opacity: 1;
+}
+
+.sidebar h3 {
+  transition: opacity 0.3s;
+}
+
+.sidebar.collapsed h3,
+.sidebar.collapsed a,
+.sidebar.collapsed .dropdown {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sidebar a {
+  display: block;
+  padding: 10px;
+  color: #333;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+.sidebar a:hover,
+.sidebar .dropdown:hover {
+  background: #ddd;
+}
+
+.dropdown {
+  cursor: pointer;
+  padding: 10px;
+  color: #333;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.dropdown-content {
+  display: none;
+  padding-left: 15px;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 8px;
+}
+
+.sidebar-action {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.toggle-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.content {
+  position: relative;
+  margin-left: 270px;
+  padding: 20px;
+  width: calc(100% - 270px);
+  transition: margin-left 0.3s;
+  z-index: -1;
+}
+
+.collapsed+.content {
+  margin-left: 80px;
+  width: calc(100% - 80px);
+}
+
+.fixed-header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: calc(100% - 250px);
+  background: white;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.content.collapsed .fixed-header {
+  width: calc(100% - 60px);
+}
+
+.content-body {
+  margin-top: 80px;
+}
+
+.card-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 30%;
+}
+
+.text-danger {
+  color: red;
+}
+
+.text-primary {
+  color: blue;
+}
+
+.text-success {
+  color: green;
+}
+
+.text-warning {
+  color: orange;
+}

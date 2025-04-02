@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="sidebar-action">
+        <h3>Kursus Mobil</h3>
+        <button class="toggle-btn" onclick="toggleSidebar()">Menu</button>
+      </div>
+      <a href="#">Dashboard</a>
+      <button class="dropdown" onclick="toggleDropdown()">Kelola ▼</button>
+      <div class="dropdown-content" id="dropdown-content">
+        <a href="#">Pengemudi</a>
+        <a href="#">Instruktur</a>
+        <a href="#">Kursus</a>
+      </div>
+      <a href="#">Jadwal</a>
+      <a href="#">Penilaian</a>
+      <a href="#">Sertifikat</a>
+      <a href="#">Laporan</a>
+    </div>
+    <div class="content">
+      <div class="fixed-header">
+        <h2>Dashboard</h2>
+        <p>
+          This is an example dashboard created using built-in elements and
+          components.
+        </p>
+      </div>
+      <div class="content-body">
+        <div class="card-container">
+          <div class="card">
+            <h5>Cash Deposits</h5>
+            <h3>1.7M</h3>
+            <p class="text-danger">54.1% less earnings</p>
+          </div>
+          <div class="card">
+            <h5>Invested Dividends</h5>
+            <h3>9M</h3>
+            <p class="text-primary">14.1% Grow Rate</p>
+          </div>
+          <div class="card">
+            <h5>Capital Gains</h5>
+            <h3 class="text-success">$563</h3>
+            <p class="text-warning">Increased by 7.35%</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      function toggleDropdown() {
+        var dropdownContent = document.getElementById("dropdown-content");
+        dropdownContent.style.display =
+          dropdownContent.style.display === "block" ? "none" : "block";
+      }
+
+      function toggleSidebar() {
+        var sidebar = document.querySelector(".sidebar");
+        var content = document.querySelector(".content");
+        sidebar.classList.toggle("collapsed");
+        content.classList.toggle("collapsed");
+      }
+    </script>
+  </body>
+</html>

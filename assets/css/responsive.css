@@ -1,0 +1,43 @@
+@media screen and (max-width: 1024px) {
+        .sidebar {
+          width: 200px;
+        }
+        .content {
+          margin-left: 220px;
+          width: calc(100% - 220px);
+        }
+        .fixed-header {
+          left: 220px;
+          width: calc(100% - 220px);
+        }
+        .card {
+          width: 45%;
+        }
+      }
+
+      @media screen and (max-width: 768px) {
+        body {
+          flex-direction: column;
+        }
+        .sidebar {
+          width: 100%;
+          height: auto;
+          position: relative;
+        }
+        .content {
+          margin-left: 0;
+          width: 100%;
+        }
+        .fixed-header {
+          left: 0;
+          width: 100%;
+        }
+
+        .content-body {
+          margin-top: 120px;
+        }
+        
+        .card {
+          width: 100%;
+        }
+      }
