@@ -7,6 +7,11 @@
   font-family: "Inter Tight", sans-serif;
 }
 
+a {
+  display: inline-block;
+  text-decoration: none;
+}
+
 body {
   display: flex;
   flex-direction: row;
@@ -54,7 +59,6 @@ body {
   display: block;
   padding: 10px;
   color: #333;
-  text-decoration: none;
   margin-bottom: 10px;
 }
 
@@ -104,10 +108,9 @@ body {
 .content {
   position: relative;
   margin-left: 270px;
-  padding: 20px;
+  padding: 25px;
   width: calc(100% - 270px);
   transition: margin-left 0.3s;
-  z-index: -1;
 }
 
 .collapsed+.content {
@@ -132,6 +135,9 @@ body {
 
 .content-body {
   margin-top: 80px;
+  background: #fff;
+  padding: 24px;
+  box-shadow: 0px 8px 45px rgba(0, 0, 0, 0.1);
 }
 
 .card-container {
@@ -162,4 +168,76 @@ body {
 
 .text-warning {
   color: orange;
+}
+
+.inputBx {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 48px;
+}
+
+.btn {
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: 0.5s;
+}
+
+.btn:hover {
+  filter: brightness(110%);
+}
+
+.primary {
+  background: #007bff;
+  color: #fff;
+}
+
+input:focus {
+  outline: 1px solid darkblue;
+}
+
+input {
+  border: 1px solid #ddd;
+  outline: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+
+.dataTable {
+  display: flex;
+}
+
+.first-column,
+.next-column {
+  width: 100%;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+tr {
+  text-align: left;
+}
+
+td {
+  padding: 16px 0;
+}
+
+thead {
+  padding: 16px;
+}
+
+tr:nth-child(even) {
+  background: #eaeaea;
+}
+
+.dataTable {
+  margin: 16px 0;
+  position: relative;
+  width: 100%;
+  border-radius: 8px;
 }
