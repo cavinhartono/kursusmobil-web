@@ -7,9 +7,30 @@
   font-family: "Inter Tight", sans-serif;
 }
 
+.icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+}
+
+svg {
+  width: inherit;
+  height: inherit;
+}
+
+line {
+  stroke: #fff;
+}
+
 a {
   display: inline-block;
   text-decoration: none;
+}
+
+button {
+  outline: none;
+  border: none;
 }
 
 body {
@@ -27,6 +48,22 @@ body {
   transition: width 0.3s;
   overflow: hidden;
   z-index: 10;
+}
+
+.sidebar a,
+.sidebar .dropdown {
+  transition: 0.3s;
+  opacity: 0.75;
+}
+
+.sidebar .dropdown:focus {
+  color: #007bff;
+  opacity: 1;
+}
+
+.sidebar .dropdown:hover,
+.sidebar a:hover {
+  opacity: 1;
 }
 
 .sidebar.collapsed {
@@ -77,6 +114,8 @@ body {
   width: 100%;
   text-align: left;
   font-size: 16px;
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 10px;
 }
 
@@ -99,7 +138,7 @@ body {
 
 .toggle-btn {
   background: #007bff;
-  color: white;
+  color: #fff;
   border: none;
   padding: 5px 10px;
   cursor: pointer;
@@ -190,6 +229,11 @@ body {
 
 .primary {
   background: #007bff;
+  color: #fff;
+}
+
+.danger {
+  background: #910e0e;
   color: #fff;
 }
 
