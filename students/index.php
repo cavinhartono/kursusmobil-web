@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php
+foreach (glob("../components/*.php") as $file) {
+  require $file;
+}
+?>
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,95 +18,45 @@
 </head>
 
 <body>
-  <div class="sidebar">
-    <div class="sidebar-action">
-      <h3>Kursus Mobil</h3>
-      <button class="toggle-btn" onclick="toggleSidebar()">Menu</button>
-    </div>
-    <a href="#">Dashboard</a>
-    <button class="dropdown" onclick="toggleDropdown()">Kelola ▼</button>
-    <div class="dropdown-content" id="dropdown-content">
-      <a href="./index.php">Pengemudi</a>
-      <a href="/instructor/index.php">Instruktur</a>
-      <a href="/course/index.php">Kursus</a>
-    </div>
-    <a href="#">Jadwal</a>
-    <a href="#">Penilaian</a>
-    <a href="#">Sertifikat</a>
-    <a href="#">Laporan</a>
-  </div>
+  <?php sidebar() ?>
   <div class="content">
-    <div class="fixed-header">
-      <h2>Data Pengemudi</h2>
-    </div>
+    <?php labelSidebar("Data Pengemudi") ?>
     <div class="content-body">
       <div class="container">
         <div action="" class="inputBx">
-          <a href="./create.php" class="btn primary">Tambah</a>
+          <button class="btn primary" id="addBtn">&plus;</button>
           <input type="text" placeholder="Pencarian Nama">
         </div>
         <div class="dataTable">
           <table>
             <thead>
               <tr>
-                <th width="120">NIM</th>
+                <th width="120">#</th>
                 <th>Nama</th>
                 <th>Email</th>
-                <th>Terakhir Diakses</th>
+                <th style="text-align: right;">No. Telepon</th>
+                <th style="text-align: center;">Terakhir Diakses</th>
                 <th>Aksi</th>
               </tr>
             </thead>
+            <?php
+            include_once("../database/connect.php");
+
+            $Students = mysqli_query($connect, "SELECT * FROM Students ORDER BY created_at DESC");
+            ?>
             <tbody>
-              <tr>
-                <td>362379001</td>
-                <td>Cavin Hartono</td>
-                <td style="text-transform: lowercase;">cavin@gmail.com</td>
-                <td>4 jam yang lalu</td>
-                <td>
-                  <a href="?action=edit">Edit</a>
-                  <a href="?action=delete">Delete</a>
-                </td>
-              </tr>
-              <tr>
-                <td>362379002</td>
-                <td>Fauzi Riza</td>
-                <td style="text-transform: lowercase;">fauzi@gmail.com</td>
-                <td>2 hari yang lalu</td>
-                <td>
-                  <a href="?action=edit">Edit</a>
-                  <a href="?action=delete">Delete</a>
-                </td>
-              </tr>
-              <tr>
-                <td>362379003</td>
-                <td>Kevin Hadi</td>
-                <td style="text-transform: lowercase;">kevin@gmail.com</td>
-                <td>1 bulan yang lalu</td>
-                <td>
-                  <a href="?action=edit">Edit</a>
-                  <a href="?action=delete">Delete</a>
-                </td>
-              </tr>
-              <tr>
-                <td>362379004</td>
-                <td>Fauzan</td>
-                <td style="text-transform: lowercase;">fauzan@gmail.com</td>
-                <td>3 bulan yang lalu</td>
-                <td>
-                  <a href="?action=edit">Edit</a>
-                  <a href="?action=delete">Delete</a>
-                </td>
-              </tr>
-              <tr>
-                <td>362379005</td>
-                <td>Fiki</td>
-                <td style="text-transform: lowercase;">fiki@gmail.com</td>
-                <td>4 bulan yang lalu</td>
-                <td>
-                  <a href="?action=edit">Edit</a>
-                  <a href="?action=delete">Delete</a>
-                </td>
-              </tr>
+              <?php while ($student = mysqli_fetch_object($Students)): ?>
+                <tr>
+                  <td><?= $student->id ?></td>
+                  <td><?= $student->name ?></td>
+                  <td style="text-transform: lowercase;"><?= $student->email ?></td>
+                  <td style="text-align: right;"><?= $student->phone ?></td>
+                  <td style="text-align: center;"><?= $student->created_at ?></td>
+                  <td>
+                    <a href="?action=delete" class="btn danger">Delete</a>
+                  </td>
+                </tr>
+              <?php endwhile ?>
             </tbody>
           </table>
         </div>
