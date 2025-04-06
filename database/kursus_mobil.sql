@@ -41,6 +41,8 @@ CREATE TABLE enrollments (
     FOREIGN KEY (instructor_id) REFERENCES instructors (id)
 );
 
+desc cars;
+
 CREATE TABLE cars (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,

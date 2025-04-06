@@ -1,9 +1,7 @@
 <?php
 
-$koneksi = mysqli_connect("localhost", "root", "", "kursus_mobil");
+$connect = mysqli_connect("localhost", "root", "", "driving_school");
 
-if (!$koneksi) {
+if (!$connect) {
   die("Koneksi gagal: " . mysqli_connect_error());
 }
-
-echo "Koneksi ke MySQL berhasil!";
