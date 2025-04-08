@@ -10,15 +10,7 @@
           <input type="<?= $field['type'] ?>" name="<?= $field['label'] ?>" id="<?= $field['label'] ?>" required>
         </div>
       <?php endforeach ?>
-      <!-- <div class="form-group">
-        <label for="email">Email</label>
-        <input type="text" id="email">
-      </div>
-      <div class="form-group">
-        <label for="phone">Nomor Telepon</label>
-        <input type="number" id="phone">
-      </div> -->
-      <button type="submit" class="btn primary">Simpan</button>
+      <button type="submit" name="submit" class="btn primary">Simpan</button>
 
     </form>
   </div>
