@@ -24,7 +24,6 @@ foreach (glob("../components/*.php") as $file) {
     <div class="content-body">
       <div class="container">
         <div action="" class="inputBx">
-          <button class="btn primary" id="addBtn">&plus;</button>
           <input type="text" placeholder="Pencarian Nama">
         </div>
         <div class="dataTable">
@@ -62,7 +61,6 @@ foreach (glob("../components/*.php") as $file) {
         </div>
       </div>
     </div>
-  </div>
   </div>
   <script>
     function toggleDropdown() {
