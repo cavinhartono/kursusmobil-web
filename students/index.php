@@ -52,7 +52,7 @@ foreach (glob("../components/*.php") as $file) {
                   <td style="text-align: right;"><?= $student->phone ?></td>
                   <td style="text-align: center;"><?= $student->created_at ?></td>
                   <td>
-                    <a href="?action=delete" class="btn danger">Delete</a>
+                    <button onclick="deleteUser(<?= $student->id ?>)" class="btn danger">Delete</button>
                   </td>
                 </tr>
               <?php endwhile ?>

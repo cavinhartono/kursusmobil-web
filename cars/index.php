@@ -24,7 +24,7 @@ foreach (glob("../components/*.php") as $file) {
     <div class="content-body">
       <div class="container">
         <div action="" class="inputBx">
-          <button class="btn primary" id="addBtn">&plus;</button>
+          <button class="btn primary" id="addBtn" onclick="document.querySelector('#modalForm').style.display = 'block'">&plus;</button>
           <input type="text" placeholder="Pencarian Nama">
         </div>
         <div class="dataTable">
@@ -42,6 +42,20 @@ foreach (glob("../components/*.php") as $file) {
             include_once("../database/connect.php");
 
             $Cars = mysqli_query($connect, "SELECT * FROM Cars ORDER BY created_at DESC");
+
+            $editData = null;
+            if (isset($_GET['edit'])) {
+              $id = $_GET['edit'];
+              $res = mysqli_query($connect, "SELECT * FROM Cars WHERE id=$id");
+              $editData = mysqli_fetch_assoc($res);
+            }
+
+            if (isset($_GET['delete'])) {
+              $id = $_GET['edit'];
+              $res = mysqli_query($connect, "DELETE Cars WHERE id=$id");
+
+              header("Location: index.php");
+            }
             ?>
             <tbody>
               <?php while ($car = mysqli_fetch_object($Cars)): ?>
@@ -51,7 +65,8 @@ foreach (glob("../components/*.php") as $file) {
                   <td><?= $car->name ?></td>
                   <td style="text-align: center;"><?= $car->created_at ?></td>
                   <td>
-                    <a href="?action=delete" class="btn danger">Delete</a>
+                    <a href="?edit=<?= $car->id ?>" onclick="document.querySelector('#modalForm').style.display = 'block'">Edit</a>
+                    <a href="?delete=<?= $car->id ?>" class="btn danger">Delete</a>
                   </td>
                 </tr>
               <?php endwhile ?>
@@ -61,7 +76,23 @@ foreach (glob("../components/*.php") as $file) {
       </div>
     </div>
   </div>
-  </div>
+
+  <?php
+  $fields = [
+    ["type" => "text", "label" => "name", "title" => "Nama Mobil"],
+    ["type" => "radio", "label" => "email", "title" => "Email"],
+    ["type" => "text", "label" => "phone", "title" => "No. Telepon"],
+  ];
+
+  if (isset($_GET['edit'])) {
+    $isEdit = isset($_GET['edit']);
+    $action = $isEdit ? './update.php' : './store.php';
+    $title  = $isEdit ? 'Edit Data Mobil' : 'Tambah Data Mobil';
+
+    form($title, $fields, $editData, $action);
+  }
+  ?>
+
   <script>
     function toggleDropdown() {
       var dropdownContent = document.getElementById("dropdown-content");

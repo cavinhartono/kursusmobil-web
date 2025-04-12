@@ -12,9 +12,6 @@ foreach (glob("../components/*.php") as $file) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>All List Students</title>
   <link rel="stylesheet" href="../assets/css/style.css" />
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 </head>
 
 <body>
@@ -43,6 +40,20 @@ foreach (glob("../components/*.php") as $file) {
             include_once("../database/connect.php");
 
             $Instructors = mysqli_query($connect, "SELECT * FROM Instructors ORDER BY created_at DESC");
+
+            $editData = null;
+            if (isset($_GET['edit'])) {
+              $id = $_GET['edit'];
+              $res = mysqli_query($connect, "SELECT * FROM Instructors WHERE id=$id");
+              $editData = mysqli_fetch_assoc($res);
+            }
+
+            if (isset($_GET['delete'])) {
+              $id = $_GET['edit'];
+              $res = mysqli_query($connect, "DELETE Instructors WHERE id=$id");
+
+              header("Location: index.php");
+            }
             ?>
             <tbody>
               <?php while ($instructor = mysqli_fetch_object($Instructors)): ?>
@@ -53,8 +64,8 @@ foreach (glob("../components/*.php") as $file) {
                   <td style="text-transform: lowercase;"><?= $instructor->phone ?></td>
                   <td><?= timeAgo($instructor->created_at) ?></td>
                   <td>
-                    <a href="?action=edit&id=<?= $instructor->id ?>">Edit</a>
-                    <a href="?action=delete&id=<?= $instructor->id ?>">Delete</a>
+                    <a href="?edit=<?= $instructor->id ?>" onclick="document.querySelector('#modalForm').style.display = 'block'">Edit</a>
+                    <a href="?delete=<?= $instructor->id ?>">Delete</a>
                   </td>
                 </tr>
               <?php endwhile ?>
@@ -71,9 +82,15 @@ foreach (glob("../components/*.php") as $file) {
     ["type" => "email", "label" => "email", "title" => "Email"],
     ["type" => "text", "label" => "phone", "title" => "No. Telepon"],
   ];
-  ?>
 
-  <?php form("Tambah Data Instruktur", $fields) ?>
+  if (isset($_GET['edit'])) {
+    $isEdit = isset($_GET['edit']);
+    $action = $isEdit ? './update.php' : './store.php';
+    $title  = $isEdit ? 'Edit Data Instruktur' : 'Tambah Data Instruktur';
+
+    form($title, $fields, $editData, $action);
+  }
+  ?>
 
   <script>
     function toggleDropdown() {
