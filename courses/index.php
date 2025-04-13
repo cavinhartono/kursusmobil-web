@@ -30,26 +30,31 @@ foreach (glob("../components/*.php") as $file) {
               <tr>
                 <th width="120">#</th>
                 <th>Nama Kursus</th>
-                <th>Instruktur</th>
-                <th style="text-align: right;">Durasi</th>
+                <th style="text-align: right; width:max-content">Durasi</th>
                 <th style="text-align: right;">Harga</th>
-                <th>Tanggal Dibuat</th>
+                <th style="text-align: center;">Tanggal Dibuat</th>
                 <th>Aksi</th>
               </tr>
             </thead>
+            <?php
+            include_once("../database/connect.php");
+
+            $Courses = mysqli_query($connect, "SELECT * FROM Courses ORDER BY created_at DESC");
+            ?>
             <tbody>
-              <tr>
-                <td>362379001</td>
-                <td style="text-transform: capitalize;">Cavin Hartono</td>
-                <td style="text-transform: capitalize;">cavin@gmail.com</td>
-                <td style="text-align: right;">6 jam</td>
-                <td style="text-transform: uppercase; text-align: right;">4 jam yang lalu</td>
-                <td>4 jam yang lalu</td>
-                <td>
-                  <a href="?action=edit">Edit</a>
-                  <a href="?action=delete">Delete</a>
-                </td>
-              </tr>
+              <?php while ($course = mysqli_fetch_object($Courses)): ?>
+                <tr>
+                  <td><?= $course->id ?></td>
+                  <td style="text-transform: capitalize; width:100%"><?= $course->name ?></td>
+                  <td style="text-align: right;"><?= $course->duration ?> jam</td>
+                  <td style="text-transform: uppercase; text-align: right;"><?= number_format($course->price, 0, ".", ".") ?> IDR</td>
+                  <td style="text-align: center;"><?= $course->created_at ?></td>
+                  <td>
+                    <a href="?action=edit">Edit</a>
+                    <a href="?action=delete">Delete</a>
+                  </td>
+                </tr>
+              <?php endwhile ?>
             </tbody>
           </table>
         </div>
