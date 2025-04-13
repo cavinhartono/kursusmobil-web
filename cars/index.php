@@ -75,7 +75,7 @@ foreach (glob("../components/*.php") as $file) {
               <?php break; ?>
           <?php endswitch ?>
         </h3>
-        <form action="<?= $type == 'create' ? './cars/store.php' : './cars/update.php' ?>" method="POST">
+        <form action="<?= $type == 'create' ? './store.php' : './update.php' ?>" method="POST">
           <?php if ($type === 'update'): ?>
             <input type="hidden" name="id" value="<?= $id ?>">
           <?php endif; ?>
