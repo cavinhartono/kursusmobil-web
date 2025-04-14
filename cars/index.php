@@ -85,8 +85,8 @@ foreach (glob("../components/*.php") as $file) {
               <label><?= $field['label'] ?>:</label>
               <select name="<?= $field['name'] ?>" required>
                 <?php foreach ($field['options'] as $option): ?>
-                  <option value="<?= $option ?>" <?= $value == $option ? 'selected' : '' ?>>
-                    <?= ucfirst($option) ?>
+                  <option value="<?= $option ?>" style="text-transform: capitalize" <?= $value == $option ? 'selected' : '' ?>>
+                    <?= $option ?>
                   </option>
                 <?php endforeach; ?>
               </select>
