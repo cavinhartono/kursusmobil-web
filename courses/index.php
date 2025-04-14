@@ -22,10 +22,10 @@ foreach (glob("../components/*.php") as $file) {
       <div class="container">
         <div action="" class="inputBx">
           <a href="./create.php" class="btn primary">Tambah</a>
-          <input type="text" placeholder="Pencarian Nama">
+          <input type="text" id="searchInput" placeholder=" Pencarian Nama">
         </div>
         <div class="dataTable">
-          <table>
+          <table id="dataTable">
             <thead>
               <tr>
                 <th width="120">#</th>
@@ -63,6 +63,18 @@ foreach (glob("../components/*.php") as $file) {
   </div>
   </div>
   <script src="../assets/js/script.js"></script>
+  <script>
+    document.getElementById("searchInput").addEventListener("keyup", function() {
+      const rows = document.querySelectorAll("#dataTable tbody tr");
+      const keyword = this.value.toLowerCase();
+
+      rows.forEach(row => {
+        const cells = Array.from(row.getElementsByTagName("td"));
+        const match = cells.some(td => td.textContent.toLowerCase().includes(keyword));
+        row.style.display = match ? "" : "none";
+      });
+    });
+  </script>
 </body>
 
 </html>

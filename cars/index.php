@@ -56,69 +56,12 @@ foreach (glob("../components/*.php") as $file) {
 </head>
 
 <body>
-  <?php function renderModal($type, $fields = [], $actionName = '', $id = '', $values = [])
-  {
-    $modalId = $type . 'Modal' . ($id ? $id : '');
-    $submitName = $type === 'create' ? 'add' : 'update';
-  ?>
-    <div id="<?= $modalId ?>" class="modal">
-      <div class="modal-content">
-        <span class="modal-close" onclick="closeModal('<?= $modalId ?>')">&times;</span>
-        <h3>
-          <?php switch ($type):
-            case 'create': ?>
-              <?= "Tambah Data $actionName" ?>
-              <?php break; ?>
-            <?php
-            default: ?>
-              <?= "Edit Data $actionName" ?>
-              <?php break; ?>
-          <?php endswitch ?>
-        </h3>
-        <form action="<?= $type == 'create' ? './store.php' : './update.php' ?>" method="POST">
-          <?php if ($type === 'update'): ?>
-            <input type="hidden" name="id" value="<?= $id ?>">
-          <?php endif; ?>
-          <?php foreach ($fields as $field): ?>
-            <?php $value = $values[$field['name']] ?? ''; ?>
-            <?php if ($field['type'] === 'select'): ?>
-              <label><?= $field['label'] ?>:</label>
-              <select name="<?= $field['name'] ?>" required>
-                <?php foreach ($field['options'] as $option): ?>
-                  <option value="<?= $option ?>" style="text-transform: capitalize" <?= $value == $option ? 'selected' : '' ?>>
-                    <?= $option ?>
-                  </option>
-                <?php endforeach; ?>
-              </select>
-            <?php elseif ($field['type'] === 'radio'): ?>
-              <label><?= $field['label'] ?>:</label>
-              <?php foreach ($field['options'] as $option): ?>
-                <label>
-                  <input type="radio" name="<?= $field['name'] ?>" value="<?= $option ?>" <?= $value == $option ? 'checked' : '' ?> required>
-                  <?= ucfirst($option) ?>
-                </label>
-              <?php endforeach; ?>
-            <?php else: ?>
-              <label><?= $field['label'] ?>:</label>
-              <input
-                type="<?= $field['type'] ?>"
-                name="<?= $field['name'] ?>"
-                value="<?= htmlspecialchars($value) ?>"
-                required>
-            <?php endif; ?>
-          <?php endforeach; ?>
-          <button type="submit" name="<?= $submitName ?>"><?= ucfirst($submitName) ?></button>
-        </form>
-      </div>
-    </div>
-  <?php } ?>
-
   <?php
   $fields = [
     ['name' => 'name', 'label' => 'Nama', 'type' => 'text'],
     ['name' => 'transmission', 'label' => 'Transmisi (Matic/Manual)', 'type' => 'radio', 'options' => ['automatic', 'manual']],
   ];
-  renderModal('create', $fields, 'Mobil');
+  modal('create', $fields, 'Mobil');
   ?>
 
   <?php sidebar() ?>
@@ -153,7 +96,7 @@ foreach (glob("../components/*.php") as $file) {
               $data = mysqli_query($connect, "SELECT * FROM Cars WHERE id=$id")->fetch_assoc();
 
               if ($data) {
-                renderModal("update", $fields, "Mobil", $id, $data);
+                modal("update", $fields, "Mobil", $id, $data);
                 echo "<script>window.onload = () => openModal('updateModal$id');</script>";
               }
             }
