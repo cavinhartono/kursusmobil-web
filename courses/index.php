@@ -15,13 +15,22 @@ foreach (glob("../components/*.php") as $file) {
 </head>
 
 <body>
+  <?php
+  $fields = [
+    ['name' => 'name', 'label' => 'Nama', 'type' => 'text'],
+    ['name' => 'duration', 'label' => 'Durasi', 'type' => 'number'],
+    ['name' => 'price', 'label' => 'Harga', 'type' => 'number'],
+  ];
+  modal('create', $fields, 'Kursus');
+  ?>
+
   <?php sidebar() ?>
   <div class="content">
     <?php labelSidebar("Data Kursus"); ?>
     <div class="content-body">
       <div class="container">
         <div action="" class="inputBx">
-          <a href="./create.php" class="btn primary">Tambah</a>
+          <button class="btn primary" onclick="openModal('createModal')"><ion-icon name="add"></ion-icon></button>
           <input type="text" id="searchInput" placeholder=" Pencarian Nama">
         </div>
         <div class="dataTable">
@@ -40,6 +49,24 @@ foreach (glob("../components/*.php") as $file) {
             include_once("../database/connect.php");
 
             $Courses = mysqli_query($connect, "SELECT * FROM Courses ORDER BY created_at DESC");
+
+            $editData = null;
+            if (isset($_GET['edit'])) {
+              $id = (int) $_GET['edit'];
+              $data = mysqli_query($connect, "SELECT * FROM Courses WHERE id=$id")->fetch_assoc();
+
+              if ($data) {
+                modal("update", $fields, "Kursus", $id, $data);
+                echo "<script>window.onload = () => openModal('updateModal$id');</script>";
+              }
+            }
+
+            if (isset($_GET['delete'])) {
+              $id = $_GET['delete'];
+              $connect->query("DELETE FROM Courses WHERE id=$id");
+
+              header("Location: index.php");
+            }
             ?>
             <tbody>
               <?php while ($course = mysqli_fetch_object($Courses)): ?>
@@ -62,19 +89,9 @@ foreach (glob("../components/*.php") as $file) {
     </div>
   </div>
   </div>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   <script src="../assets/js/script.js"></script>
-  <script>
-    document.getElementById("searchInput").addEventListener("keyup", function() {
-      const rows = document.querySelectorAll("#dataTable tbody tr");
-      const keyword = this.value.toLowerCase();
-
-      rows.forEach(row => {
-        const cells = Array.from(row.getElementsByTagName("td"));
-        const match = cells.some(td => td.textContent.toLowerCase().includes(keyword));
-        row.style.display = match ? "" : "none";
-      });
-    });
-  </script>
 </body>
 
 </html>
