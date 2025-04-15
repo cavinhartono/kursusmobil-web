@@ -8,7 +8,7 @@ if (isset($_POST['update'])) {
   $duration = $_POST['duration'];
   $price = $_POST['price'];
 
-  $result = mysqli_query($connect, "UPDATE Cars SET name = '$name', duration = $duration, price = $price WHERE id = $id");
+  $result = mysqli_query($connect, "UPDATE Courses SET name = '$name', duration = $duration, price = $price WHERE id = $id");
 
   header("Location: index.php");
   exit;
