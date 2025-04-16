@@ -1,8 +1,17 @@
 <?php
+function getFormAction($type)
+{
+  $currentDir = basename(dirname($_SERVER['PHP_SELF']));
+  $fileName = $type === 'create' ? 'store.php' : 'update.php';
+  return "./$fileName";
+}
+
+
 function modal($type, $fields = [], $actionName = '', $id = '', $values = [])
 {
   $modalId = $type . 'Modal' . ($id ? $id : '');
   $submitName = $type === 'create' ? 'add' : 'update';
+  $action = getFormAction($type);
 ?>
   <div id="<?= $modalId ?>" class="modal">
     <div class="modal-content">
@@ -18,7 +27,7 @@ function modal($type, $fields = [], $actionName = '', $id = '', $values = [])
             <?php break; ?>
         <?php endswitch ?>
       </h3>
-      <form action="<?= $type == 'create' ? './store.php' : './update.php' ?>" method="POST">
+      <form action="<?= $action ?>" method="POST">
         <?php if ($type === 'update'): ?>
           <input type="hidden" name="id" value="<?= $id ?>">
         <?php endif; ?>
