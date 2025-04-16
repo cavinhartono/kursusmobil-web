@@ -1,6 +1,6 @@
-document.getElementById("searchInput").addEventListener("keyup", () => {
+document.getElementById("searchInput").addEventListener("keyup", (event) => {
+  const keyword = event.target.value.toLowerCase();
   const rows = document.querySelectorAll("#dataTable tbody tr");
-  const keyword = this.value.toLowerCase();
 
   rows.forEach((row) => {
     const cells = Array.from(row.getElementsByTagName("td"));
