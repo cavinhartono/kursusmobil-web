@@ -109,7 +109,7 @@ body {
 }
 
 .btn:hover {
-  filter: brightness(110%);
+  filter: brightness(105%);
   transform: translateY(-8px);
 }
 
