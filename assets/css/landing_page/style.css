@@ -16,6 +16,22 @@
   text-align: center;
 }
 
+.homepage .powerBy .title {
+  display: flex;
+  gap: 8px;
+}
+
+.homepage .powerBy .title .icon {
+  opacity: 0;
+  display: none;
+}
+
+.homepage .powerBy .title:hover .icon {
+  opacity: 1;
+  display: flex;
+  align-items: center;
+}
+
 .homepage .detail .title {
   margin: 16px 0;
 }
