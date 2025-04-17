@@ -15,13 +15,23 @@ foreach (glob("../components/*.php") as $file) {
 </head>
 
 <body>
+  <?php
+  $fields = [
+    ['name' => 'name', 'label' => 'Nama', 'type' => 'text'],
+    ['name' => 'phone', 'label' => 'No. Telepon', 'type' => 'text'],
+    ['name' => 'email', 'label' => 'Email', 'type' => 'email'],
+
+  ];
+  modal('create', $fields, 'Instruktur');
+  ?>
+
   <?php sidebar(); ?>
   <div class="content">
     <?php labelSidebar("Data Instruktur"); ?>
     <div class="content-body">
       <div class="container">
         <div action="" class="inputBx">
-          <button class="btn primary" onclick="document.querySelector('#modalForm').style.display = 'block'">&plus;</button>
+          <button class="btn primary" onclick="openModal('createModal')"><ion-icon name="add"></ion-icon></button>
           <input type="text" placeholder="Pencarian Nama">
         </div>
         <div class="dataTable">
@@ -43,14 +53,18 @@ foreach (glob("../components/*.php") as $file) {
 
             $editData = null;
             if (isset($_GET['edit'])) {
-              $id = $_GET['edit'];
-              $res = mysqli_query($connect, "SELECT * FROM Instructors WHERE id=$id");
-              $editData = mysqli_fetch_assoc($res);
+              $id = (int) $_GET['edit'];
+              $data = mysqli_query($connect, "SELECT * FROM Instructors WHERE id=$id")->fetch_assoc();
+
+              if ($data) {
+                modal("update", $fields, "Instruktur", $id, $data);
+                echo "<script>window.onload = () => openModal('updateModal$id');</script>";
+              }
             }
 
             if (isset($_GET['delete'])) {
-              $id = $_GET['edit'];
-              $res = mysqli_query($connect, "DELETE Instructors WHERE id=$id");
+              $id = $_GET['delete'];
+              $connect->query("DELETE FROM Instructors WHERE id=$id");
 
               header("Location: index.php");
             }
@@ -64,8 +78,8 @@ foreach (glob("../components/*.php") as $file) {
                   <td style="text-transform: lowercase;"><?= $instructor->phone ?></td>
                   <td><?= timeAgo($instructor->created_at) ?></td>
                   <td>
-                    <a href="?edit=<?= $instructor->id ?>" onclick="document.querySelector('#modalForm').style.display = 'block'">Edit</a>
-                    <a href="?delete=<?= $instructor->id ?>">Delete</a>
+                    <a href="?edit=<?= $instructor->id ?>" class="btn warning"><ion-icon name="create-outline"></ion-icon></a>
+                    <a href="?delete=<?= $instructor->id ?>" class="btn danger" onclick="return confirm('Yakin hapus?')"><ion-icon name="trash-bin-outline"></ion-icon></a>
                   </td>
                 </tr>
               <?php endwhile ?>
@@ -76,36 +90,9 @@ foreach (glob("../components/*.php") as $file) {
     </div>
   </div>
 
-  <?php
-  $fields = [
-    ["type" => "text", "label" => "name", "title" => "Nama Lengkap"],
-    ["type" => "email", "label" => "email", "title" => "Email"],
-    ["type" => "text", "label" => "phone", "title" => "No. Telepon"],
-  ];
-
-  if (isset($_GET['edit'])) {
-    $isEdit = isset($_GET['edit']);
-    $action = $isEdit ? './update.php' : './store.php';
-    $title  = $isEdit ? 'Edit Data Instruktur' : 'Tambah Data Instruktur';
-
-    form($title, $fields, $editData, $action);
-  }
-  ?>
-
-  <script>
-    function toggleDropdown() {
-      var dropdownContent = document.getElementById("dropdown-content");
-      dropdownContent.style.display =
-        dropdownContent.style.display === "block" ? "none" : "block";
-    }
-
-    function toggleSidebar() {
-      var sidebar = document.querySelector(".sidebar");
-      var content = document.querySelector(".content");
-      sidebar.classList.toggle("collapsed");
-      content.classList.toggle("collapsed");
-    }
-  </script>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <script src="../assets/js/script.js"></script>
 </body>
 
 </html>
