@@ -62,20 +62,9 @@ foreach (glob("../components/*.php") as $file) {
       </div>
     </div>
   </div>
-  <script>
-    function toggleDropdown() {
-      var dropdownContent = document.getElementById("dropdown-content");
-      dropdownContent.style.display =
-        dropdownContent.style.display === "block" ? "none" : "block";
-    }
-
-    function toggleSidebar() {
-      var sidebar = document.querySelector(".sidebar");
-      var content = document.querySelector(".content");
-      sidebar.classList.toggle("collapsed");
-      content.classList.toggle("collapsed");
-    }
-  </script>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <script src="../assets/js/script.js"></script>
 </body>
 
 </html>
