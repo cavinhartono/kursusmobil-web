@@ -1,7 +1,6 @@
 <?php
 function getFormAction($type)
 {
-  $currentDir = basename(dirname($_SERVER['PHP_SELF']));
   $fileName = $type === 'create' ? 'store.php' : 'update.php';
   return "./$fileName";
 }

@@ -64,6 +64,16 @@ CREATE TABLE certifications (
 );
 
 -- Insert data ke dalam tabel `students`
+INSERT INTO users (roles, name, email, password, phone) VALUES
+('student', 'Ahmad Fauzi', 'ahmad.fauzi@email.com', 'ahmad123', '081234567890'),
+('student', 'Budi Santoso', 'budi.santoso@email.com', 'budi123', '081234567891'),
+('student', 'Citra Lestari', 'citra.lestari@email.com', 'citra123', '081234567892'),
+('student', 'Dewi Permata', 'dewi.permata@email.com', 'dewi1234', '081234567893'),
+('instructor', 'Faisal Hadi', 'faisal.hadi@email.com', 'faisal123', '081234567895'),
+('instructor', 'Gina Ananda', 'gina.ananda@email.com', 'gina1234','081234567896'),
+('instructor', 'Hendra Wijaya', 'hendra.wijaya@email.com', 'hendra123', '081234567897'),
+('student', 'Eko Saputra', 'eko.saputra@email.com', 'eko12345', '081234567894');
+
 INSERT INTO students (name, email, phone) VALUES
 ('Ahmad Fauzi', 'ahmad.fauzi@email.com', '081234567890'),
 ('Budi Santoso', 'budi.santoso@email.com', '081234567891'),
@@ -96,3 +106,19 @@ INSERT INTO enrollments (student_id, course_id, car_id, instructor_id) VALUES
 (3, 3, 3, 3),
 (4, 1, 2, 1),
 (5, 2, 3, 2);
+
+ALTER TABLE Enrollments ADD COLUMN time_in TIME NOT NULL;
+
+ALTER TABLE Enrollments ADD COLUMN date DATE;
+
+ALTER TABLE Enrollments ADD COLUMN time_out TIME NOT NULL;
+
+CREATE TABLE Users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    roles ENUM('student', "instructor"),
+    name VARCHAR(100),
+    email VARCHAR(100) UNIQUE,
+    password VARCHAR(100),
+    phone VARCHAR(15),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
