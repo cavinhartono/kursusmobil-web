@@ -52,6 +52,18 @@
         </ul>
       </div>
     </section>
+    <section class="courses">
+      <?php
+      include_once("./database/connect.php");
+
+      $Courses = mysqli_query($connect, "SELECT * FROM Courses ORDER BY created_at");
+      ?>
+      <ul class="card">
+        <?php while ($course = mysqli_fetch_object($Courses)): ?>
+          <li class="list"><a href="" class="link"></a></li>
+        <?php endwhile ?>
+      </ul>
+    </section>
   </main>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
