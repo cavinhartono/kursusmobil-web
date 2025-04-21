@@ -53,6 +53,7 @@
       </div>
     </section>
     <section class="courses">
+      <h1 class="title">Kursus Yang Tersedia</h1>
       <?php
       include_once("./database/connect.php");
 
@@ -60,7 +61,14 @@
       ?>
       <ul class="card">
         <?php while ($course = mysqli_fetch_object($Courses)): ?>
-          <li class="list"><a href="" class="link"></a></li>
+          <li class="list">
+            <div class="img">
+              <img src="https://picsum.photos/id/<?= $course->id ?>3/1280/830" alt="">
+            </div>
+            <h1 class="title"><?= $course->name ?></h1>
+            <h2 class="subtitle"><?= number_format($course->price, 0) ?> IDR</h2>
+            <a href="courses/<?= $course->id ?>" class="btn primary">Belajar Sekarang</a>
+          </li>
         <?php endwhile ?>
       </ul>
     </section>
