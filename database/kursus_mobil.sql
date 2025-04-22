@@ -4,6 +4,8 @@ CREATE DATABASE driving_school;
 
 USE driving_school;
 
+SELECT * FROM Users;
+
 CREATE TABLE students (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -115,7 +117,7 @@ ALTER TABLE Enrollments ADD COLUMN time_out TIME NOT NULL;
 
 CREATE TABLE Users (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    roles ENUM('student', "instructor"),
+    roles ENUM('student', "instructor") DEFAULT,
     name VARCHAR(100),
     email VARCHAR(100) UNIQUE,
     password VARCHAR(100),
