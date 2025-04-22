@@ -1,21 +1,20 @@
 <?php
 include_once("../database/connect.php");
 
-session_start();
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  $email = $_POST['email'];
-  $password = $_POST['password'];
+  if (isset($_POST['submit'])) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
-  $statement = mysqli_query($connect, "SELECT * FROM Users WHERE email = '$email'");
-  $result = $statement->fetch_object();
+    $statement = $connect->query("SELECT * FROM Users WHERE email = '$email'");
+    $auth = $statement->fetch_object();
 
-  if (isset($result)) {
-    if (password_verify($password, $result->password)) {
-      $_SESSION['user_id'] = $result->id;
-      $_SESSION['roles'] = $result->roles;
+    if ($auth && password_verify($password, $auth->password)) {
+      $_SESSION['auth'] = $auth->id;
+      $_SESSION['name'] = explode(" ", $auth->name)[0];
+      $_SESSION['roles'] = $auth->roles;
 
-      switch ($result['roles']) {
+      switch ($_SESSION['roles']) {
         case 'instructor':
           echo "Selamat Datang, Instruktur";
           break;
@@ -23,12 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           echo "Hola, Supir";
           break;
       }
-      exit();
     } else {
-      $error = "Password salah.";
+      header("Location: login.php");
+      $error = "Email dan password tidak sesuai.";
     }
-  } else {
-    $error = "Email tidak ditemukan.";
   }
 }
 ?>
@@ -41,12 +38,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 
 <body>
-  <h2>Login E-Learning Driving School</h2>
+  <h2>Login</h2>
   <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
   <form method="post">
     Email: <input type="email" name="email" required><br>
     Password: <input type="password" name="password" required><br>
-    <button type="submit">Login</button>
+    <button type="submit" name="submit">Login</button>
   </form>
 </body>
 
