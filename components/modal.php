@@ -58,7 +58,7 @@ function modal($type, $fields = [], $actionName = '', $id = '', $values = [])
               required>
           <?php endif; ?>
         <?php endforeach; ?>
-        <button type="submit" name="<?= $submitName ?>"><?= ucfirst($submitName) ?></button>
+        <button type="submit" name="<?= $submitName ?>" class="btn primary"><ion-icon name="checkmark"></ion-icon></button>
       </form>
     </div>
   </div>
