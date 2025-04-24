@@ -16,11 +16,11 @@ foreach (glob("../components/*.php") as $file) {
 
 <body>
   <?php
+  $i = 0;
   $fields = [
     ['name' => 'name', 'label' => 'Nama', 'type' => 'text'],
     ['name' => 'phone', 'label' => 'No. Telepon', 'type' => 'text'],
     ['name' => 'email', 'label' => 'Email', 'type' => 'email'],
-
   ];
   modal('create', $fields, 'Instruktur');
   ?>
@@ -72,7 +72,7 @@ foreach (glob("../components/*.php") as $file) {
             <tbody>
               <?php while ($instructor = mysqli_fetch_object($Instructors)): ?>
                 <tr>
-                  <td><?= $instructor->id ?></td>
+                  <td><?= ++$i ?></td>
                   <td><?= $instructor->name ?></td>
                   <td><?= $instructor->email ?></td>
                   <td style="text-transform: lowercase;"><?= $instructor->phone ?></td>
