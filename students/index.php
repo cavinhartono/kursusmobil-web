@@ -17,6 +17,14 @@ foreach (glob("../components/*.php") as $file) {
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 </head>
 
+<?php
+$fields = [
+  ['name' => 'name', 'label' => 'Nama', 'type' => 'text'],
+  ['name' => 'email', 'label' => 'Email', 'type' => 'email'],
+  ['name' => 'phone', 'label' => 'No. Telepon', 'type' => 'text'],
+];
+?>
+
 <body>
   <?php sidebar() ?>
   <div class="content">
@@ -42,17 +50,37 @@ foreach (glob("../components/*.php") as $file) {
             include_once("../database/connect.php");
 
             $Students = mysqli_query($connect, "SELECT * FROM Students ORDER BY created_at DESC");
+            $i = 0;
+
+            $editData = null;
+            if (isset($_GET['edit'])) {
+              $id = (int) $_GET['edit'];
+              $data = mysqli_query($connect, "SELECT * FROM Students WHERE id=$id")->fetch_assoc();
+
+              if ($data) {
+                modal("update", $fields, "Pengemudi", $id, $data);
+                echo "<script>window.onload = () => openModal('updateModal$id');</script>";
+              }
+            }
+
+            if (isset($_GET['delete'])) {
+              $id = $_GET['delete'];
+              $connect->query("DELETE FROM Students WHERE id=$id");
+
+              header("Location: index.php");
+            }
             ?>
             <tbody>
               <?php while ($student = mysqli_fetch_object($Students)): ?>
                 <tr>
-                  <td><?= $student->id ?></td>
+                  <td><?= ++$i ?></td>
                   <td><?= $student->name ?></td>
                   <td style="text-transform: lowercase;"><?= $student->email ?></td>
                   <td style="text-align: right;"><?= $student->phone ?></td>
-                  <td style="text-align: center;"><?= $student->created_at ?></td>
+                  <td style="text-align: center;"><?= timeAgo($student->created_at) ?></td>
                   <td>
-                    <button onclick="deleteUser(<?= $student->id ?>)" class="btn danger">Delete</button>
+                    <a href="?edit=<?= $student->id ?>" class="btn warning"><ion-icon name="create-outline"></ion-icon></a>
+                    <a href="?delete=<?= $student->id ?>" class="btn danger" onclick="return confirm('Yakin hapus?')"><ion-icon name="trash-bin-outline"></ion-icon></a>
                   </td>
                 </tr>
               <?php endwhile ?>
