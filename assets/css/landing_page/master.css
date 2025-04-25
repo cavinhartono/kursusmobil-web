@@ -17,6 +17,11 @@ li {
   font-size: 1.5rem;
 }
 
+.text {
+  text-align: justify;
+  line-height: 1.75rem;
+}
+
 p {
   opacity: 0.75;
   margin: 8px 0;
