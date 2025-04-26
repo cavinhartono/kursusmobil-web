@@ -7,7 +7,7 @@ if (isset($_POST['add'])) {
   $duration = $_POST['duration'];
   $price = $_POST['price'];
 
-  $result = mysqli_query($connect, "INSERT INTO Cars(name, duration, price) VALUES('$name', $duration, $price)");
+  $result = mysqli_query($connect, "INSERT INTO Courses(name, duration, price) VALUES('$name', $duration, $price)");
 
   header("Location: index.php");
 }

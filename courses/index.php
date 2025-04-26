@@ -75,10 +75,10 @@ foreach (glob("../components/*.php") as $file) {
                   <td style="text-transform: capitalize; width:100%"><?= $course->name ?></td>
                   <td style="text-align: right;"><?= $course->duration ?> jam</td>
                   <td style="text-transform: uppercase; text-align: right;"><?= number_format($course->price, 0, ".", ".") ?> IDR</td>
-                  <td style="text-align: center;"><?= $course->created_at ?></td>
+                  <td style="text-align: center;"><?= timeAgo($course->created_at) ?></td>
                   <td>
-                    <a href="?action=edit">Edit</a>
-                    <a href="?action=delete">Delete</a>
+                    <a href="?edit=<?= $course->id ?>" class="btn warning"><ion-icon name="create-outline"></ion-icon></a>
+                    <a href="?delete=<?= $course->id ?>" class="btn danger" onclick="return confirm('Yakin hapus?')"><ion-icon name="trash-bin-outline"></ion-icon></a>
                   </td>
                 </tr>
               <?php endwhile ?>
