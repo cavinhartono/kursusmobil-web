@@ -49,13 +49,13 @@ $fields = [
             <?php
             include_once("../database/connect.php");
 
-            $Students = mysqli_query($connect, "SELECT * FROM Students ORDER BY created_at DESC");
+            $Students = mysqli_query($connect, "SELECT * FROM Users WHERE roles = 'student' ORDER BY created_at DESC");
             $i = 0;
 
             $editData = null;
             if (isset($_GET['edit'])) {
               $id = (int) $_GET['edit'];
-              $data = mysqli_query($connect, "SELECT * FROM Students WHERE id=$id")->fetch_assoc();
+              $data = mysqli_query($connect, "SELECT * FROM Users WHERE id=$id")->fetch_assoc();
 
               if ($data) {
                 modal("update", $fields, "Pengemudi", $id, $data);
@@ -65,7 +65,7 @@ $fields = [
 
             if (isset($_GET['delete'])) {
               $id = $_GET['delete'];
-              $connect->query("DELETE FROM Students WHERE id=$id");
+              $connect->query("DELETE FROM Users WHERE id=$id");
 
               header("Location: index.php");
             }
