@@ -21,6 +21,7 @@ foreach (glob("../components/*.php") as $file) {
     ['name' => 'name', 'label' => 'Nama', 'type' => 'text'],
     ['name' => 'phone', 'label' => 'No. Telepon', 'type' => 'text'],
     ['name' => 'email', 'label' => 'Email', 'type' => 'email'],
+    ['name' => 'password', 'label' => 'Password', 'type' => 'text'],
   ];
   modal('create', $fields, 'Instruktur');
   ?>
@@ -42,19 +43,23 @@ foreach (glob("../components/*.php") as $file) {
                 <th>Nama</th>
                 <th>Email</th>
                 <th>No. Telpon</th>
-                <th>Terakhir Dibuat</th>
                 <th>Aksi</th>
               </tr>
             </thead>
             <?php
             include_once("../database/connect.php");
 
-            $Instructors = mysqli_query($connect, "SELECT * FROM Instructors ORDER BY created_at DESC");
+            $Instructors = mysqli_query(
+              $connect,
+              "SELECT users.id, users.name, users.email, users.password, users.phone 
+              FROM Instructors
+              INNER JOIN Users ON Instructors.user_id = Users.id"
+            );
 
             $editData = null;
             if (isset($_GET['edit'])) {
               $id = (int) $_GET['edit'];
-              $data = mysqli_query($connect, "SELECT * FROM Instructors WHERE id=$id")->fetch_assoc();
+              $data = mysqli_query($connect, "SELECT * FROM Users WHERE id=$id")->fetch_assoc();
 
               if ($data) {
                 modal("update", $fields, "Instruktur", $id, $data);
@@ -64,7 +69,7 @@ foreach (glob("../components/*.php") as $file) {
 
             if (isset($_GET['delete'])) {
               $id = $_GET['delete'];
-              $connect->query("DELETE FROM Instructors WHERE id=$id");
+              $connect->query("DELETE FROM Users WHERE id=$id");
 
               header("Location: index.php");
             }
@@ -76,7 +81,6 @@ foreach (glob("../components/*.php") as $file) {
                   <td><?= $instructor->name ?></td>
                   <td><?= $instructor->email ?></td>
                   <td style="text-transform: lowercase;"><?= $instructor->phone ?></td>
-                  <td><?= timeAgo($instructor->created_at) ?></td>
                   <td>
                     <a href="?edit=<?= $instructor->id ?>" class="btn warning"><ion-icon name="create-outline"></ion-icon></a>
                     <a href="?delete=<?= $instructor->id ?>" class="btn danger" onclick="return confirm('Yakin hapus?')"><ion-icon name="trash-bin-outline"></ion-icon></a>
