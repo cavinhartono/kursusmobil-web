@@ -82,6 +82,13 @@ CREATE TABLE Exams (
 
 -- Insert data ke dalam tabel `students`
 INSERT INTO users (roles, name, email, password, phone) VALUES
+('student', 'Ahmad Fauzi', 'ahmad.fauzi@email.com', 'ahmad123', '081234567890'),
+('student', 'Budi Santoso', 'budi.santoso@email.com', 'budi123', '081234567891'),
+('student', 'Citra Lestari', 'citra.lestari@email.com', 'citra123', '081234567892'),
+('student', 'Dewi Permata', 'dewi.permata@email.com', 'dewi1234', '081234567893'),
+('student', 'Eko Saputra', 'eko.saputra@email.com', 'eko12345', '081234567894');
+
+INSERT INTO users (roles, name, email, password, phone) VALUES
 ('admin', 'Muhammad Cavin Hartono Putra', 'cavin@email.com', 'cavin123', '081234567889'),
 ('admin', 'Fauzi Riza Wahyudi', 'fauzi@email.com', 'fauzi123', '081234567888'),
 ('student', 'Ahmad Fauzi', 'ahmad.fauzi@email.com', 'ahmad123', '081234567890'),
