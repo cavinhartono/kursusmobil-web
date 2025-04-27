@@ -15,11 +15,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $_SESSION['roles'] = $auth->roles;
 
       switch ($_SESSION['roles']) {
+        case 'admin':
+          header("Location: ../dashboard.php");
+          break;
         case 'instructor':
-          echo "Selamat Datang, Instruktur";
+          header("Location: ../dashboard.php");
           break;
         case 'student':
-          echo "Hola, Supir";
+          header("Location: ../index.php");
           break;
       }
     } else {

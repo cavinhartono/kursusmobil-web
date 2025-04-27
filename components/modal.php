@@ -54,7 +54,7 @@ function modal($type, $fields = [], $actionName = '', $id = '', $values = [])
             <input
               type="<?= $field['type'] ?>"
               name="<?= $field['name'] ?>"
-              value="<?= htmlspecialchars($value) ?>"
+              value="<?= ($field['name'] === "password") ? '' : htmlspecialchars($value) ?>"
               required>
           <?php endif; ?>
         <?php endforeach; ?>

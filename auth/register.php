@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $connect->query("INSERT INTO Users(roles, name, email, password, phone) VALUES ('student', '$name', '$email', '$password', '$phoneNumber')");
 
-    header("location: ../index.php");
+    header("location: login.php");
   }
 }
 ?>
