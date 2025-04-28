@@ -11,6 +11,9 @@ $id = $_GET['id'];
 $statement = $connect->query("SELECT * FROM Courses WHERE id = $id");
 $course = $statement->fetch_object();
 
+if (isset($_POST['create'])) {
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +38,7 @@ $course = $statement->fetch_object();
           <?= number_format($course->price, 0, ",", ".") ?> IDR
         </h2>
         <p class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad neque quasi possimus aut recusandae optio odit blanditiis quo velit facere corporis omnis laboriosam corrupti aperiam ab tempore nemo, odio temporibus quia! Fugiat.</p>
-        <a href="../enrollments/store.php?id=<?= $course->id ?>" class="btn primary">Enroll</a>
+        <a href="../enrollments/buy.php?id=<?= $course->id ?>" class="btn primary">Enroll</a>
       </div>
       <div class="img">
         <img src="https://picsum.photos/id/<?= $course->id ?>3/1280/830">
