@@ -80,6 +80,17 @@ CREATE TABLE Exams (
     FOREIGN KEY (instructor_id) REFERENCES users (id)
 );
 
+CREATE TABLE Master_Cards (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    serial_number VARCHAR(50) NOT NULL,
+    name VARCHAR(50) NOT NULL,
+    balance FLOAT NOT NULL
+);
+
+CREATE TABLE Orders();
+
+CREATE TABLE Orders();
+
 -- Insert data ke dalam tabel `students`
 INSERT INTO users (roles, name, email, password, phone) VALUES
 ('student', 'Ahmad Fauzi', 'ahmad.fauzi@email.com', 'ahmad123', '081234567890'),
@@ -101,6 +112,11 @@ INSERT INTO users (roles, name, email, password, phone) VALUES
 ('student', 'Eko Saputra', 'eko.saputra@email.com', 'eko12345', '081234567894');
 
 -- Insert data ke dalam tabel `instructors`
+INSERT INTO master_cards (serial_number, name, balance) VALUES
+("255", "Muhammad Cavin Hartono Putra", 12000000),
+("174", "Fauzi Riza Wahyudi", 300000),
+("696", "Budi Utomo", 4000000);
+
 INSERT INTO instructors (name, email, phone) VALUES
 ('Faisal Hadi', 'faisal.hadi@email.com', '081234567895'),
 ('Gina Ananda', 'gina.ananda@email.com', '081234567896'),
@@ -166,3 +182,7 @@ BEGIN
     END IF;
 END;
 // DELIMITER;
+
+SELECT 9 AS user_id, "Sukses" AS status, 5 AS course_id, 7500000.00 AS total_price;
+
+SELECT "Kevin Hartono" AS "Pengemudi", "Sukses" AS status, "qris" AS "Metode Pembayaran", "Kursus Mengemudi Dasar" AS "Kursus", 750000.00 AS "Harga", "27-04-2025 22:10:39" AS "Waktu Transaksi";
