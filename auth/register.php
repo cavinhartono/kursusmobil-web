@@ -19,19 +19,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html>
 
 <head>
-  <title>Register E-Learning</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - Kursus Mobil</title>
+  <link rel="stylesheet" href="../assets/css/auth/style.css">
 </head>
 
 <body>
-  <h2>Register E-Learning Driving School</h2>
-  <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
-  <form method="POST">
-    Email: <input type="email" name="email" required><br>
-    Nama Lengkap: <input type="text" name="name" required><br>
-    No. Telpon: <input type="text" name="phone" required><br>
-    Password: <input type="password" name="password" required><br>
-    <button type="submit" name="submit">Buat</button>
-  </form>
+  <div class="container">
+    <h2 class="title">Buat Akun</h2>
+    <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
+    <form method="POST" class="form">
+      <div class="field">
+        <label for="email">Email:<sup>*</sup></label>
+        <input type="email" name="email" id="email" required>
+      </div>
+      <div class="field">
+        <label for="name">Nama Lengkap:<sup>*</sup></label>
+        <input type="text" name="name" id="name" required>
+      </div>
+      <div class="field">
+        <label for="phone">No. Telpon:<sup>*</sup></label>
+        <input type="text" name="phone" id="phone" required>
+      </div>
+      <div class="field">
+        <label for="password">Password:<sup>*</sup></label>
+        <input type="password" name="password" id="password" required>
+      </div>
+      <div class="action">
+        <a href="./login.php" class="btn">Masuk Akun</a>
+        <button type="submit" name="submit" class="btn primary">Buat</button>
+      </div>
+    </form>
+  </div>
 </body>
 
 </html>
