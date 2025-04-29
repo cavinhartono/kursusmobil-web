@@ -12,7 +12,7 @@ a {
 }
 
 body {
-  background: lightblue;
+    background: #E7D283;
   color: #222;
   min-height: 100vh;
   display: grid;
