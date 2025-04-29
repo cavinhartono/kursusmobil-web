@@ -37,17 +37,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html>
 
 <head>
-  <title>Login E-Learning</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../assets/css/auth/style.css">
+  <title>Login - Kursus Mobil</title>
 </head>
 
 <body>
-  <h2>Login</h2>
-  <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
-  <form method="post">
-    Email: <input type="email" name="email" required><br>
-    Password: <input type="password" name="password" required><br>
-    <button type="submit" name="submit">Login</button>
-  </form>
+  <div class="container">
+    <h2 class="title">Masuk Akun</h2>
+    <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
+    <form method="post" class="form">
+      <div class="field">
+        <label for="email">Email:<sup>*</sup></label>
+        <input type="email" name="email" id="email" placeholder="user@email.com" required>
+      </div>
+      <div class="field">
+        <label for="password">Password:<sup>*</sup></label>
+        <input type="password" name="password" id="password" placeholder="Minimal 8 karakter" required>
+      </div>
+      <div class="action">
+        <a href="./register.php" class="btn">Buat Akun</a>
+        <button type="submit" class="btn primary" name="submit">Lanjut</button>
+      </div>
+    </form>
+  </div>
 </body>
 
 </html>
