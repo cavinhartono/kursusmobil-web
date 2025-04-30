@@ -87,9 +87,25 @@ CREATE TABLE Master_Cards (
     balance FLOAT NOT NULL
 );
 
-CREATE TABLE Orders();
+CREATE TABLE Orders(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    course_id INT NOT NULL,
+    status ENUM('pending', 'paid', 'cancelled') DEFAULT 'pending',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES Users(id),
+    FOREIGN KEY (course_id) REFERENCES Courses(id)
+);
 
-CREATE TABLE Orders();
+CREATE TABLE Payments(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT NOT NULL,
+    metode ENUM('qris', 'debit') NOT NULL,
+    jumlah DECIMAL(10, 2) NOT NULL,
+    status ENUM('pending', 'success', 'failed') DEFAULT 'pending',
+    paid_at TIMESTAMP NULL,
+    FOREIGN KEY (order_id) REFERENCES orders (id)
+);
 
 -- Insert data ke dalam tabel `students`
 INSERT INTO users (roles, name, email, password, phone) VALUES
@@ -185,4 +201,5 @@ END;
 
 SELECT 9 AS user_id, "Sukses" AS status, 5 AS course_id, 7500000.00 AS total_price;
 
-SELECT "Kevin Hartono" AS "Pengemudi", "Sukses" AS status, "qris" AS "Metode Pembayaran", "Kursus Mengemudi Dasar" AS "Kursus", 750000.00 AS "Harga", "27-04-2025 22:10:39" AS "Waktu Transaksi";
+USE driving_school;
+SHOW TABLES;
