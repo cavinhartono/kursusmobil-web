@@ -26,8 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           break;
       }
     } else {
-      header("Location: login.php");
       $error = "Email dan password tidak sesuai.";
+      header("Location: login.php");
     }
   }
 }
