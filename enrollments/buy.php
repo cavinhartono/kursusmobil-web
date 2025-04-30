@@ -3,6 +3,7 @@
 include_once("../database/connect.php");
 
 $course_id = isset($_GET['id']);
+$user_id = empty($_SESSION['auth']) ? header("Location: ../auth/login.php") : $_SESSION['auth'];
 
 $User = mysqli_query(
   $connect,
@@ -17,6 +18,10 @@ $Course = mysqli_query(
     FROM Courses
     WHERE id = $course_id"
 )->fetch_object();
+
+$connect->query(
+  "INSERT INTO Orders(user_id, course_id) VALUES ($user_id, $course_id)"
+);
 
 ?>
 
