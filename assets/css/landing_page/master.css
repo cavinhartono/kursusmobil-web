@@ -37,6 +37,13 @@ a {
   color: inherit;
 }
 
+input,
+select {
+  border: 1px solid #ddd;
+  padding: 8px;
+  width: 100%;
+}
+
 body {
   background: #fafafa;
   color: #222;
