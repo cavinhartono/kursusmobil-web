@@ -60,7 +60,8 @@ $connect->query(
     </div>
 
     <div id="qris" style="display: none;">
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=192.168.43.45:8001/enrollments/store.php?user_id=<?= $_SESSION['auth'] ?>?price=<?= $Course->price ?>?course_id=<?= $course_id ?>" alt="">
+      <?php $url = "192.168.43.45:8001/enrollments/pay.php?user_id=$_SESSION[auth]&price=$Course->price&course_id=$course_id&method=qris" ?>
+      <img src="https://chart.googleapis.com/chart?cht=qr&chs=250x250&chl=<?= urlencode($url) ?>" alt="QR Code">
     </div>
   </form>
 
