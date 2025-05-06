@@ -35,6 +35,8 @@ CREATE TABLE schedules (
     FOREIGN KEY (enrollment_id) REFERENCES Enrollments (id)
 );
 
+DROP TABLE enrollments;
+
 CREATE TABLE enrollments (
     id INT AUTO_INCREMENT PRIMARY KEY,
     student_id INT NOT NULL,
@@ -44,6 +46,18 @@ CREATE TABLE enrollments (
     time_out TIME NOT NULL,
     enrollment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (student_id) REFERENCES Users (id),
+    FOREIGN KEY (course_id) REFERENCES Courses (id)
+);
+
+CREATE TABLE Tests (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    course_id INT NOT NULL,
+    DATE DATE NOT NULL,
+    time_in TIME NOT NULL,
+    time_out TIME NOT NULL,
+    enrollment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES Users (id),
     FOREIGN KEY (course_id) REFERENCES Courses (id)
 );
 
@@ -97,14 +111,25 @@ CREATE TABLE Orders(
     FOREIGN KEY (course_id) REFERENCES Courses(id)
 );
 
+SHOW TABLES;
+
 CREATE TABLE Payments(
     id INT AUTO_INCREMENT PRIMARY KEY,
     order_id INT NOT NULL,
-    metode ENUM('qris', 'debit') NOT NULL,
-    jumlah DECIMAL(10, 2) NOT NULL,
+    `method` ENUM('qris', 'debit') NOT NULL,
+    total DECIMAL(10, 2) NOT NULL,
     status ENUM('pending', 'success', 'failed') DEFAULT 'pending',
     paid_at TIMESTAMP NULL,
     FOREIGN KEY (order_id) REFERENCES orders (id)
+);
+
+CREATE TABLE materials (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    content TEXT,
+    file VARCHAR(255),
+    course_id INT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (course_id) REFERENCES Courses (id)
 );
 
 -- Insert data ke dalam tabel `students`
@@ -149,16 +174,6 @@ INSERT INTO cars (name, transmission) VALUES
 ('Toyota Avanza', 'automatic'),
 ('Honda Brio', 'manual'),
 ('Suzuki Swift', 'manual');
-
--- Insert data ke dalam tabel `enrollments`
-INSERT INTO enrollments (student_id, course_id, car_id, instructor_id) VALUES
-(1, 1, 1, 1),
-(2, 2, 2, 2),
-(3, 3, 3, 3),
-(4, 1, 2, 1),
-(5, 2, 3, 2);
-
-ALTER TABLE Enrollments ADD COLUMN time_in TIME NOT NULL;
 
 ALTER TABLE Cars ADD COLUMN status ENUM("active", "non-active") DEFAULT 'active';
 
