@@ -26,7 +26,7 @@ function modal($type, $fields = [], $actionName = '', $id = '', $values = [])
             <?php break; ?>
         <?php endswitch ?>
       </h3>
-      <form action="<?= $action ?>" method="POST">
+      <form action="<?= $action ?>" method="POST" enctype="multipart/form-data">
         <?php if ($type === 'update'): ?>
           <input type="hidden" name="id" value="<?= $id ?>">
         <?php endif; ?>
@@ -49,6 +49,10 @@ function modal($type, $fields = [], $actionName = '', $id = '', $values = [])
                 <?= ucfirst($option) ?>
               </label>
             <?php endforeach; ?>
+          <?php elseif ($field['type'] === 'file'): ?>
+            <input type="file" name="<?= $field['name'] ?>" accept="application/pdf" multiple>
+          <?php elseif ($field['type'] === 'hidden'): ?>
+            <input type="hidden" name="<?= $field['name'] ?>" value="<?= $field['value'] ?>">
           <?php else: ?>
             <label><?= $field['label'] ?>:</label>
             <input

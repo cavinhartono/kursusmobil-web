@@ -8,7 +8,7 @@
       </button>
     </div>
     <a href="../dashboard.php">Dashboard</a>
-    <?php if ($_SESSION['roles'] == "admin"): ?>
+    <?php if ($_SESSION['roles'] === "admin"): ?>
       <button class="dropdown" onclick="toggleDropdown()">Kelola <span>▼</span></button>
       <div class="dropdown-content" id="dropdown-content">
         <a href="../students/index.php">Pengemudi</a>
@@ -17,7 +17,7 @@
         <a href="../cars/index.php">Mobil</a>
       </div>
       <a href="#">Laporan</a>
-    <?php elseif ($_SESSION['roles'] == "instructor"): ?>
+    <?php elseif ($_SESSION['roles'] === "instructor"): ?>
       <a href="#">Jadwal</a>
       <a href="">Penilaian</a>
     <?php else: ?>
