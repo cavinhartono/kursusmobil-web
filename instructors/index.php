@@ -16,6 +16,8 @@ foreach (glob("../components/*.php") as $file) {
 
 <body>
   <?php
+  session_start();
+
   $i = 0;
   $fields = [
     ['name' => 'name', 'label' => 'Nama', 'type' => 'text'],

@@ -18,6 +18,7 @@ foreach (glob("../components/*.php") as $file) {
 </head>
 
 <?php
+session_start();
 $fields = [
   ['name' => 'name', 'label' => 'Nama', 'type' => 'text'],
   ['name' => 'email', 'label' => 'Email', 'type' => 'email'],

@@ -16,6 +16,8 @@ foreach (glob("../components/*.php") as $file) {
 
 <body>
   <?php
+  session_start();
+
   $fields = [
     ['name' => 'name', 'label' => 'Nama', 'type' => 'text'],
     ['name' => 'transmission', 'label' => 'Transmisi (Matic/Manual)', 'type' => 'radio', 'options' => ['automatic', 'manual']],
@@ -86,6 +88,12 @@ foreach (glob("../components/*.php") as $file) {
     </div>
   </div>
 
+  <?php if ($_SESSION['roles'] !== 'admin'): ?>
+    <script>
+      alert('Anda bukan Admin');
+      window.location.href = '../dashboard.php';
+    </script>
+  <?php endif ?>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   <script src="../assets/js/script.js"></script>
