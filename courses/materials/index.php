@@ -38,15 +38,18 @@ $course = $connect->query("SELECT name FROM Courses WHERE id = $course_id")->fet
     <div class="content-body">
       <div class="container">
         <div action="" class="inputBx">
-          <button class="btn primary" onclick="openModal('createModal')"><ion-icon name="add"></ion-icon></button>
+          <div>
+            <a href="./create.php" class="btn primary"><ion-icon name="add"></ion-icon> Materi</a>
+            <a href="./../quiz/create.php" class="btn primary"><ion-icon name="add"></ion-icon> Kuis</a>
+          </div>
           <input type="text" id="searchInput" placeholder=" Pencarian Nama">
         </div>
         <div class="dataTable">
           <table id="dataTable">
             <thead>
               <tr>
-                <th width="120">#</th>
-                <th>Nama Materi</th>
+                <th>#</th>
+                <th>Nama</th>
                 <th style="text-align: center;">Tanggal Dibuat</th>
                 <th>Aksi</th>
               </tr>
