@@ -39,8 +39,8 @@ $course = $connect->query("SELECT name FROM Courses WHERE id = $course_id")->fet
       <div class="container">
         <div action="" class="inputBx">
           <div>
-            <a href="./create.php" class="btn primary"><ion-icon name="add"></ion-icon> Materi</a>
-            <a href="./../quiz/create.php" class="btn primary"><ion-icon name="add"></ion-icon> Kuis</a>
+            <a href="./create.php?id=<?= $course_id ?>" class="btn primary"><ion-icon name="add"></ion-icon> Materi</a>
+            <a href="./../quiz/create.php?id=<?= $course_id ?>" class="btn primary"><ion-icon name="add"></ion-icon> Kuis</a>
           </div>
           <input type="text" id="searchInput" placeholder=" Pencarian Nama">
         </div>
@@ -55,7 +55,7 @@ $course = $connect->query("SELECT name FROM Courses WHERE id = $course_id")->fet
               </tr>
             </thead>
             <?php
-            $Materials = $connect->query("SELECT * FROM Materials WHERE course_id = $course_id");
+            $Materials = $connect->query("SELECT * FROM Materials WHERE course_id = $course_id ORDER BY order_index ASC");
 
             if (isset($_GET['delete'])) {
               $id = $_GET['delete'];
