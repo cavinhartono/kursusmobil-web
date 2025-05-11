@@ -10,6 +10,7 @@
     </div>
     <a href="/dashboard.php" class="<?= str_contains($current, '/dashboard.php') ? 'active' : '' ?>">Dashboard</a>
     <?php if ($_SESSION['roles'] === "admin"): ?>
+      <a href="/list_transaction.php" class="<?= str_contains($current, '/list_transaction.php') ? 'active' : '' ?>">Transaksi</a>
       <button class="dropdown" onclick="toggleDropdown()">Kelola <span>▼</span></button>
       <div class="dropdown-content" id="dropdown-content">
         <a href="/students/index.php" class="<?= str_contains($current, '/students') ? 'active' : '' ?>">Pengemudi</a>
