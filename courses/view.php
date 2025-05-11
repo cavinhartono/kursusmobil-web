@@ -7,12 +7,12 @@ foreach (glob("../components/landingPage/*.php") as $file) {
 }
 
 $id = $_GET['id'];
+$auth = !empty($_SESSION['auth']) ? $_SESSION['auth'] : 0;
 
 $statement = $connect->query("SELECT * FROM Courses WHERE id = $id");
 $course = $statement->fetch_object();
 
-if (isset($_POST['create'])) {
-}
+$enrollment = $connect->query("SELECT IF(student_id = $auth && course_id = $id, TRUE, FALSE) AS is_learn FROM Enrollments")->fetch_object();
 
 ?>
 
@@ -38,7 +38,11 @@ if (isset($_POST['create'])) {
           <?= number_format($course->price, 0, ",", ".") ?> IDR
         </h2>
         <p class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad neque quasi possimus aut recusandae optio odit blanditiis quo velit facere corporis omnis laboriosam corrupti aperiam ab tempore nemo, odio temporibus quia! Fugiat.</p>
-        <a href="../enrollments/buy.php?id=<?= $course->id ?>" class="btn primary">Enroll</a>
+        <?php if ($enrollment->is_learn == 0): ?>
+          <a href="../enrollments/buy.php?id=<?= $course->id ?>" class="btn primary">Enroll</a>
+        <?php else: ?>
+          <a href="./materials/view.php?id=<?= $course->id ?>" class="btn primary">Pelajari</a>
+        <?php endif ?>
       </div>
       <div class="img">
         <img src="https://picsum.photos/id/<?= $course->id ?>3/1280/830">
