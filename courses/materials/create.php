@@ -33,7 +33,7 @@ $course = $connect->query("SELECT name FROM Courses WHERE id = $course_id")->fet
 <body>
   <?php sidebar() ?>
   <div class="content">
-    <?php labelSidebar("Edit Data Materi"); ?>
+    <?php labelSidebar("Tambah Materi"); ?>
     <div class="content-body">
       <div class="container">
         <form action="./store.php" method="POST" onsubmit="return submitForm()">

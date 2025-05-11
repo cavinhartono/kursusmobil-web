@@ -23,24 +23,15 @@ $course = $connect->query("SELECT name FROM Courses WHERE id = $course_id")->fet
 </head>
 
 <body>
-  <?php
-  $fields = [
-    ['name' => 'course_id', 'value' => $course_id, 'type' => 'hidden'],
-    ['name' => 'order_index', 'label' => 'Kode Materi', 'type' => 'text'],
-    ['name' => 'title', 'label' => 'Judul', 'type' => 'text'],
-    ['name' => 'content', 'label' => 'Isi Materi'],
-  ];
-  ?>
-
   <?php sidebar() ?>
   <div class="content">
     <?php labelSidebar("Materi untuk $course->name"); ?>
     <div class="content-body">
       <div class="container">
         <div action="" class="inputBx">
-          <div>
-            <a href="./create.php?id=<?= $course_id ?>" class="btn primary"><ion-icon name="add"></ion-icon> Materi</a>
-            <a href="./../quiz/create.php?id=<?= $course_id ?>" class="btn primary"><ion-icon name="add"></ion-icon> Kuis</a>
+          <div style="display: flex; gap:8px">
+            <a style="display: flex; align-items: center; gap: 8px" href="./create.php?id=<?= $course_id ?>" class="btn primary"><ion-icon name="add"></ion-icon> Materi</a>
+            <a style="display: flex; align-items: center; gap: 8px" href="./../quiz/create.php?id=<?= $course_id ?>" class="btn primary"><ion-icon name="add"></ion-icon> Kuis</a>
           </div>
           <input type="text" id="searchInput" placeholder=" Pencarian Nama">
         </div>
