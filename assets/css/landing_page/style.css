@@ -98,9 +98,14 @@
 }
 
 .card .list {
-  border: 2px solid #222;
+  border: 2px solid rgba(231, 210, 131, 0.5);
   border-radius: 32px;
+  transition: 0.3s;
   overflow: hidden;
+}
+
+.card .list:hover {
+  border: 2px solid rgba(34, 34, 34, 1);
 }
 
 .card .list img {
