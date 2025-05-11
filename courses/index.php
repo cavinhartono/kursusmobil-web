@@ -32,7 +32,7 @@ foreach (glob("../components/*.php") as $file) {
       <div class="container">
         <div action="" class="inputBx">
           <button class="btn primary" onclick="openModal('createModal')"><ion-icon name="add"></ion-icon></button>
-          <input type="text" id="searchInput" placeholder=" Pencarian Nama">
+          <input type="text" id="searchInput" placeholder="Pencarian Nama">
         </div>
         <div class="dataTable">
           <table id="dataTable">
