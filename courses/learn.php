@@ -6,6 +6,12 @@ include_once('../database/connect.php');
 
 $course_id = $_GET['id'];
 $Quizzes = $connect->query("SELECT id, title FROM Quizzes WHERE course_id = $course_id");
+
+$done_quizzes = [];
+$qresults = $connect->query("SELECT quiz_id FROM quiz_results WHERE user_id = $_SESSION[auth] AND course_id = $course_id");
+while ($r = mysqli_fetch_assoc($qresults)) {
+  $done_quizzes[] = $r['quiz_id'];
+}
 ?>
 
 <head>
@@ -60,7 +66,12 @@ $Quizzes = $connect->query("SELECT id, title FROM Quizzes WHERE course_id = $cou
       <div id="materi-list" class="materials"></div>
       <h1>Kuis</h1>
       <?php while ($quiz = mysqli_fetch_object($Quizzes)): ?>
-        <a href="./quiz/index.php?id=<?= $quiz->id ?>"><?= $quiz->title ?></a>
+        <?php $is_done = in_array($quiz->id, $done_quizzes); ?>
+        <a
+          style="<?= $is_done ? 'color: green; font-weight: bold;' : '' ?>"
+          href="./quiz/index.php?id=<?= $quiz->id ?>">
+          <?= $quiz->title ?> <?= $is_done ? ' ✓ ' : '' ?>
+        </a>
       <?php endwhile ?>
     </aside>
     <div id="konten-container">
