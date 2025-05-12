@@ -90,7 +90,6 @@ foreach (glob("../components/*.php") as $file) {
       </div>
     </div>
   </div>
-  </div>
   <?php if ($_SESSION['roles'] !== 'admin'): ?>
     <script>
       alert('Anda bukan Admin');

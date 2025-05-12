@@ -5,58 +5,24 @@
 include_once('../database/connect.php');
 
 $course_id = $_GET['id'];
+$auth = $_SESSION['auth'];
 $Quizzes = $connect->query("SELECT id, title FROM Quizzes WHERE course_id = $course_id");
 
 $done_quizzes = [];
-$qresults = $connect->query("SELECT quiz_id FROM quiz_results WHERE user_id = $_SESSION[auth] AND course_id = $course_id");
+$qresults = $connect->query("SELECT quiz_id FROM quiz_results WHERE user_id = $auth AND course_id = $course_id");
 while ($r = mysqli_fetch_assoc($qresults)) {
   $done_quizzes[] = $r['quiz_id'];
 }
+
+$current_quiz = $connect->query("SELECT COUNT(*) FROM quiz_results WHERE course_id = $course_id AND user_id = $auth")->fetch_object();
+$all_quiz = $connect->query("SELECT COUNT(*) FROM quizzes WHERE course_id = $course_id")->fetch_object();
 ?>
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/assets/css/client/style.css">
   <title>Document</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-
-    .list-item {
-      display: block;
-      padding: 8px;
-      margin: 4px 0;
-      border: 1px solid #ccc;
-      background-color: #f7f7f7;
-      cursor: pointer;
-    }
-
-    .list-item:hover {
-      background-color: #e0e0e0;
-    }
-
-    #konten-container {
-      width: 100%;
-      margin-top: 20px;
-      padding: 12px;
-      border: 1px solid #aaa;
-    }
-
-    .materials {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .container {
-      position: relative;
-      width: 100%;
-      display: flex;
-      gap: 32px;
-    }
-  </style>
 </head>
 
 <body>
@@ -68,11 +34,14 @@ while ($r = mysqli_fetch_assoc($qresults)) {
       <?php while ($quiz = mysqli_fetch_object($Quizzes)): ?>
         <?php $is_done = in_array($quiz->id, $done_quizzes); ?>
         <a
-          style="<?= $is_done ? 'color: green; font-weight: bold;' : '' ?>"
-          href="./quiz/index.php?id=<?= $quiz->id ?>">
+          style="<?= $is_done ? 'color: green; font-weight: bold;' : "" ?>"
+          href=" ./quiz/index.php?id=<?= $quiz->id ?>">
           <?= $quiz->title ?> <?= $is_done ? ' ✓ ' : '' ?>
         </a>
       <?php endwhile ?>
+      <?php if ($current_quiz == $all_quiz): ?>
+        <a href="../ujian_praktek.php">Ajukan Praktek</a>
+      <?php endif ?>
     </aside>
     <div id="konten-container">
       <h2 id="judul"></h2>
