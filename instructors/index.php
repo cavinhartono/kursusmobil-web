@@ -10,7 +10,7 @@ foreach (glob("../components/*.php") as $file) {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>All List Students</title>
+  <title>All List Instructors</title>
   <link rel="stylesheet" href="../assets/css/style.css" />
 </head>
 
@@ -53,9 +53,9 @@ foreach (glob("../components/*.php") as $file) {
 
             $Instructors = mysqli_query(
               $connect,
-              "SELECT users.id, users.name, users.email, users.password, users.phone 
-              FROM Instructors
-              INNER JOIN Users ON Instructors.user_id = Users.id"
+              "SELECT id, name, email, password, phone 
+              FROM Users
+              WHERE roles = 'instructor'"
             );
 
             $editData = null;
