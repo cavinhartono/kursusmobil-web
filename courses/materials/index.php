@@ -12,7 +12,7 @@ foreach (glob("../../components/*.php") as $file) {
 
 $course_id = $_GET['id'];
 
-$course = $connect->query("SELECT name FROM Courses WHERE id = $course_id")->fetch_object();
+$course = $connect->query("SELECT name, quiz_json FROM Courses WHERE id = $course_id")->fetch_object();
 ?>
 
 <head>
@@ -28,10 +28,15 @@ $course = $connect->query("SELECT name FROM Courses WHERE id = $course_id")->fet
     <?php labelSidebar("Materi untuk $course->name"); ?>
     <div class="content-body">
       <div class="container">
-        <div action="" class="inputBx">
+        <div class="inputBx">
           <div style="display: flex; gap:8px">
             <a style="display: flex; align-items: center; gap: 8px" href="./create.php?id=<?= $course_id ?>" class="btn primary"><ion-icon name="add"></ion-icon> Materi</a>
             <a style="display: flex; align-items: center; gap: 8px" href="./../quiz/create.php?id=<?= $course_id ?>" class="btn primary"><ion-icon name="add"></ion-icon> Kuis</a>
+            <?php if (empty($course->quiz_json)): ?>
+              <a style="display: flex; align-items: center; gap: 8px" href="./../finalExam/create.php?id=<?= $course_id ?>" class="btn primary"><ion-icon name="add"></ion-icon> Ujian Praktek</a>
+            <?php else: ?>
+              <a style="display: flex; align-items: center; gap: 8px" href="./../finalExam/edit.php?id=<?= $course_id ?>" class="btn warning"><ion-icon name="pencil"></ion-icon> Ujian Praktek</a>
+            <?php endif ?>
           </div>
           <input type="text" id="searchInput" placeholder=" Pencarian Nama">
         </div>
