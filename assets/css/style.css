@@ -231,6 +231,32 @@ body {
   color: #fff;
 }
 
+.success {
+  background: #537d5d;
+  color: #fff;
+}
+
+.status {
+  border-radius: 24px;
+  display: block;
+  text-align: center;
+  padding: 8px 0;
+  width: 100px;
+  background: transparent;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.status.success {
+  background: #c4d6c6;
+  color: #537d5d;
+}
+
+.status.warning {
+  background: #f7eb9f;
+  color: #91880e;
+}
+
 .warning {
   background: #91880e;
   color: #fff;
