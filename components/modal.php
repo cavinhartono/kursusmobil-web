@@ -53,6 +53,12 @@ function modal($type, $fields = [], $actionName = '', $id = '', $values = [])
             <input type="file" name="<?= $field['name'] ?>" accept="application/pdf" multiple>
           <?php elseif ($field['type'] === 'hidden'): ?>
             <input type="hidden" name="<?= $field['name'] ?>" value="<?= $field['value'] ?>">
+          <?php elseif ($field['type'] === 'date'): ?>
+            <label><?= $field['label'] ?>:</label>
+            <input type="date" name="<?= $field['name'] ?>">
+          <?php elseif ($field['type'] === 'time'): ?>
+            <label><?= $field['label'] ?>:</label>
+            <input type="time" name="<?= $field['name'] ?>">
           <?php else: ?>
             <label><?= $field['label'] ?>:</label>
             <input

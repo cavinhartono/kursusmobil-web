@@ -20,10 +20,9 @@
       </div>
       <a href="/reports.php" class="<?= str_contains($current, '/reports') ? 'active' : '' ?>">Laporan</a>
     <?php elseif ($_SESSION['roles'] === "instructor"): ?>
-      <a href="/schedule.php" class="<?= str_contains($current, '/schedule') ? 'active' : '' ?>">Jadwal</a>
-      <a href="/grades.php" class="<?= str_contains($current, '/grades') ? 'active' : '' ?>">Penilaian</a>
+      <a href="/schedules" class="<?= str_contains($current, '/schedules') ? 'active' : '' ?>">Jadwal Penilaian</a>
     <?php else: ?>
-      <a href="/schedule.php" class="<?= str_contains($current, '/schedule') ? 'active' : '' ?>">Jadwal</a>
+      <a href="/schedules" class="<?= str_contains($current, '/schedules') ? 'active' : '' ?>">Jadwal</a>
       <a href="/grades.php" class="<?= str_contains($current, '/grades') ? 'active' : '' ?>">Penilaian</a>
       <a href="/certificate.php" class="<?= str_contains($current, '/certificate') ? 'active' : '' ?>">Sertifikat</a>
     <?php endif ?>
