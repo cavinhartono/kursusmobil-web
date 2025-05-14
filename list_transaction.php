@@ -10,7 +10,8 @@ $i = 0;
 $Transactions = $connect->query("SELECT Courses.Name AS 'course', Users.name AS 'username', payments.method AS 'method_type', Payments.Total AS 'total_price', Orders.Status AS 'status', paid_at FROM payments
                                 JOIN orders ON payments.order_id
                                 JOIN Users ON Orders.user_id = Users.id
-                                JOIN Courses ON Orders.course_id = courses.id");
+                                JOIN Courses ON Orders.course_id = courses.id
+                                ORDER BY status DESC");
 
 ?>
 
@@ -51,9 +52,13 @@ $Transactions = $connect->query("SELECT Courses.Name AS 'course', Users.name AS 
                   <td><?= $transaction->course ?></td>
                   <td><?= $transaction->username ?></td>
                   <td><?= $transaction->method_type ?></td>
-                  <td><?= $transaction->total_price ?></td>
-                  <td><?= $transaction->status ?></td>
-                  <td><?= $transaction->paid_at ?></td>
+                  <td><?= number_format($transaction->total_price, 0, '.', '.') ?> IDR</td>
+                  <td>
+                    <span class="status <?= $transaction->status === 'paid' ? 'success' : 'warning' ?>">
+                      <?= $transaction->status === 'paid' ? "Success" : $transaction->status ?>
+                    </span>
+                  </td>
+                  <td><?= timeAgo($transaction->paid_at) ?></td>
                 </tr>
               <?php endwhile ?>
             </tbody>
