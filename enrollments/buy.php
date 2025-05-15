@@ -47,11 +47,10 @@ $Course = mysqli_query(
     <p>Email: <?= $User->email ?></p>
     <p>Nomor Telepon: <?= $User->phone ?></p>
     <div id="display" style="display: none;"></div>
-    <form method="post">
+    <form method="POST" action="pay.php">
       <select name="metode" id="metode" onchange="toggleMetode()" required>
         <option value="">-- Pilih --</option>
-        <option value="debit">Kartu Debit</option>
-        <option value="qris">QRIS</option>
+        <option value="debit" selected>Kartu Debit</option>
       </select>
 
       <div id="debit" style="display:none;">
