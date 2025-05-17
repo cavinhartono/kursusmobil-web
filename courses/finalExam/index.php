@@ -23,7 +23,7 @@ $quizzes = json_decode($course->quiz_json, true);
 <body>
   <form action="store.php" method="POST">
     <input type="hidden" name="course_id" value="<?= $course_id ?>">
-    <input type="hidden" name="user_id" value="<?= $_SESSION['auth'] ?>">
+    <input type="hidden" name="user_id" value="<?= $user_id ?>">
     <?php foreach ($quizzes as $quiz): ?>
       <h3><?= htmlspecialchars($quiz['category']) ?></h3>
       <?php foreach ($quiz['items'] as $item): ?>
