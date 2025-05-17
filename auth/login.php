@@ -58,10 +58,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       </div>
       <div class="action">
         <a href="./register.php" class="btn">Buat Akun</a>
-        <button type="submit" class="btn primary" name="submit">Lanjut</button>
+        <button type="submit" class="btn primary" name="submit">Lanjut <ion-icon name="arrow-forward-outline"></ion-icon></button>
       </div>
     </form>
   </div>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <script src="../assets/js/script.js"></script>
 </body>
 
 </html>

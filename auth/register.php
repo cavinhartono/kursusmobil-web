@@ -48,10 +48,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       </div>
       <div class="action">
         <a href="./login.php" class="btn">Masuk Akun</a>
-        <button type="submit" name="submit" class="btn primary">Buat</button>
+        <button type="submit" name="submit" class="btn primary">Buat <ion-icon name="arrow-forward-outline"></ion-icon></button>
       </div>
     </form>
   </div>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <script src="../assets/js/script.js"></script>
 </body>
 
 </html>

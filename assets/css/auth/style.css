@@ -32,7 +32,7 @@ body {
 
 .form {
   position: relative;
-  width: 100%;
+  width: 380px;
   margin: 24px 0;
 }
 
@@ -73,6 +73,10 @@ sup {
 .btn.primary {
   border: none;
   background: #E7D283;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
 }
 
 .action {
