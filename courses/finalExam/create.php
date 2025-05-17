@@ -4,9 +4,9 @@
 <?php
 session_start();
 
-include_once("../database/connect.php");
+include_once("../../database/connect.php");
 
-foreach (glob("../components/*.php") as $file) {
+foreach (glob("../../components/*.php") as $file) {
   require $file;
 }
 

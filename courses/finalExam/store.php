@@ -41,19 +41,28 @@ if (isset($_POST['get_result'])) {
     }
   }
 
-  $score_from_user = $connect->query("SELECT (SUM(score) / SUM(total) * 100) AS result FROM quiz_results 
-                                  WHERE user_id = $user_id AND course_id = $course_id")->fetch_object();
-  $test_from_instructor = round(($results / $count) * 100);
+  $score_from_user = $connect->query(
+    "SELECT (SUM(score) / SUM(total) * 100) AS result FROM quiz_results 
+    WHERE user_id = $user_id AND course_id = $course_id"
+  )->fetch_object()->result;
+  $test_from_instructor = ($results / $count) * 100;
 
-  $get_id_from_enrollment = $connect->query("SELECT id FROM Enrollments WHERE user_id = $user_id AND course_id = $course_id");
+  $get_id_from_enrollment = $connect->query(
+    "SELECT id FROM Enrollments 
+    WHERE student_id = $user_id AND course_id = $course_id"
+  )->fetch_object()->id;
   $connect->query("UPDATE Schedules SET `status` = 'done' WHERE id = $get_id_from_enrollment");
 
-  $total_score = ($score_from_user * 0.20) + ($test_from_instructor * 0.80);
+  $total_score = round(($score_from_user * 0.20) + ($test_from_instructor * 0.80));
 
   if (isSuccess($total_score)) {
-    $connect->query("INSERT INTO Certifications(enrollment_id, instructor_id, total_score, `status`) VALUES ($get_id_from_enrollment, $_SESSION[auth], $total_score, 'success')");
+    $connect->query("UPDATE Enrollments SET `is_completed` = TRUE WHERE id = $get_id_from_enrollment");
+    $connect->query("UPDATE Schedules SET `status` = 'Done' WHERE id = $get_id_from_enrollment");
+    $connect->query("INSERT INTO Certifications(enrollment_id, instructor_id, total_score_quiz, total_score_test, final_result, `status`) 
+                    VALUES ($get_id_from_enrollment, $_SESSION[auth], $score_from_user, $test_from_instructor, $total_score, 'success')");
   } else {
-    $connect->query("INSERT INTO Certifications(enrollment_id, instructor_id, total_score, `status`) VALUES ($get_id_from_enrollment, $_SESSION[auth], $total_score, 'failed')");
+    $connect->query("INSERT INTO Certifications(enrollment_id, instructor_id, total_score_quiz, total_score_test, final_result, `status`) 
+                    VALUES ($get_id_from_enrollment, $_SESSION[auth], $score_from_user, $test_from_instructor, $total_score, 'failed')");
   }
 
   header("Location: ../../schedules/index.php");
@@ -61,5 +70,5 @@ if (isset($_POST['get_result'])) {
 
 function isSuccess($final_score)
 {
-  return $final_score >= 80 ? true : false;
+  return $final_score >= 80 ? TRUE : FALSE;
 }
