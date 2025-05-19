@@ -3,7 +3,7 @@
 include_once("../../database/connect.php");
 
 $material = $connect->query("SELECT * FROM Materials WHERE id = $_GET[page]")->fetch_object();
-$course = $connect->query("SELECT name FROM Courses WHERE id = $_GET[id]")->fetch_object();
+$course = $connect->query("SELECT name FROM Courses WHERE id = $_GET[id]")->fetch_object()->name;
 
 ?>
 
@@ -13,7 +13,7 @@ $course = $connect->query("SELECT name FROM Courses WHERE id = $_GET[id]")->fetc
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><?= $material->title ?> - <?= $course->name ?></title>
+  <title><?= $material->title ?> - <?= $course ?></title>
 </head>
 
 <body>

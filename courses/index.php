@@ -11,7 +11,7 @@ foreach (glob("../components/*.php") as $file) {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>All List Courses</title>
-  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/dashboard/style.css" />
 </head>
 
 <body>
@@ -80,7 +80,7 @@ foreach (glob("../components/*.php") as $file) {
                   <td>
                     <a href="?edit=<?= $course->id ?>" class="btn warning"><ion-icon name="create-outline"></ion-icon></a>
                     <a href="?delete=<?= $course->id ?>" class="btn danger" onclick="return confirm('Yakin hapus?')"><ion-icon name="trash-bin-outline"></ion-icon></a>
-                    <a href="materials/index.php?id=<?= $course->id ?>">Materi</a>
+                    <a href="materials/index.php?id=<?= $course->id ?>" class="btn primary"><ion-icon name="eye-outline"></ion-icon></a>
                   </td>
                 </tr>
               <?php endwhile ?>

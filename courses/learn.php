@@ -40,7 +40,7 @@ $all_quiz = $connect->query("SELECT COUNT(*) FROM quizzes WHERE course_id = $cou
         </a>
       <?php endwhile ?>
       <?php if ($current_quiz == $all_quiz): ?>
-        <a href="../ujian_praktek.php">Ajukan Praktek</a>
+        <a href="../schedules/create.php?course_id=<?= $course_id ?>">Ajukan Praktek</a>
       <?php endif ?>
     </aside>
     <div id="konten-container">

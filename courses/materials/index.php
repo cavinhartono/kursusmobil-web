@@ -53,7 +53,7 @@ $course = $connect->query("SELECT name, quiz_json FROM Courses WHERE id = $cours
             <?php
             $Materials = $connect->query("SELECT * FROM Materials WHERE course_id = $course_id ORDER BY order_index ASC");
 
-            if (isset($_GET['delete'])) {
+            if (isset($_GET['delete_material'])) {
               $id = $_GET['delete'];
               $connect->query("DELETE FROM Materials WHERE id=$id");
 
@@ -68,8 +68,8 @@ $course = $connect->query("SELECT name, quiz_json FROM Courses WHERE id = $cours
                   <td style="text-align: center;"><?= timeAgo($material->uploaded_at) ?></td>
                   <td>
                     <a href="edit.php?id=<?= $material->id ?>" class="btn warning"><ion-icon name="create-outline"></ion-icon></a>
-                    <a href="?delete=<?= $material->id ?>" class="btn danger" onclick="return confirm('Yakin hapus?')"><ion-icon name="trash-bin-outline"></ion-icon></a>
-                    <a href="view.php?id=<?= $course_id ?>&page=<?= $material->id ?>" class="btn danger">View</a>
+                    <a href="?delete_material=<?= $material->id ?>" class="btn danger" onclick="return confirm('Yakin hapus?')"><ion-icon name="trash-bin-outline"></ion-icon></a>
+                    <a href="view.php?id=<?= $course_id ?>&page=<?= $material->id ?>" class="btn primary"><ion-icon name="eye-outline"></ion-icon></a>
                   </td>
                 </tr>
               <?php endwhile ?>
@@ -78,7 +78,46 @@ $course = $connect->query("SELECT name, quiz_json FROM Courses WHERE id = $cours
         </div>
       </div>
     </div>
-  </div>
+    <div class="content-body" style="margin-top: 16px;">
+      <div class="container">
+        <div class="dataTable">
+          <table id="dataTable">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nama</th>
+                <th style="text-align: center;">Tanggal Dibuat</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <?php
+            $Quizzes = $connect->query("SELECT * FROM Quizzes WHERE course_id = $course_id ORDER BY order_index ASC");
+
+            if (isset($_GET['delete_quiz'])) {
+              $id = $_GET['delete'];
+              $connect->query("DELETE FROM Quizzes WHERE id=$id");
+
+              header("Location: index.php");
+            }
+            ?>
+            <tbody>
+              <?php while ($quiz = mysqli_fetch_object($Quizzes)): ?>
+                <tr>
+                  <td><?= $quiz->order_index ?></td>
+                  <td><?= $quiz->title ?></td>
+                  <td style="text-align: center;"><?= timeAgo($quiz->created_at) ?></td>
+                  <td>
+                    <a href="../quiz/edit.php?id=<?= $quiz->id ?>" class="btn warning"><ion-icon name="create-outline"></ion-icon></a>
+                    <a href="?delete_quiz=<?= $quiz->id ?>" class="btn danger" onclick="return confirm('Yakin hapus?')"><ion-icon name="trash-bin-outline"></ion-icon></a>
+                    <a href="../quiz/index.php?id=<?= $quiz->id ?>" class="btn primary"><ion-icon name="eye-outline"></ion-icon></a>
+                  </td>
+                </tr>
+              <?php endwhile ?>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
   <?php if ($_SESSION['roles'] !== 'admin'): ?>
     <script>
