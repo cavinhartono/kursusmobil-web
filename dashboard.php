@@ -18,6 +18,18 @@ $is_admin = $_SESSION['roles'] === 'admin' ? TRUE : FALSE;
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="assets/css/dashboard/style.css">
   <title>Dashboard</title>
+  <style>
+    .grafik {
+      margin: 24px 0;
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .grafik .list {
+      width: 100%;
+    }
+  </style>
 </head>
 
 <body>
@@ -48,6 +60,58 @@ $is_admin = $_SESSION['roles'] === 'admin' ? TRUE : FALSE;
           <li class="list" style="--current-color: #d8cfff;">
             <h3>Mobil</h3>
             <p class="text"><?= $cars ?></p>
+          </li>
+        </ul>
+        <ul class="grafik">
+          <!-- <li class="list">
+            <h1 class="title">Minat Kursus Terbanyak</h1>
+            <?php
+            $Most_Courses = $connect->query("SELECT Courses.name, COUNT(e.id) AS Total_Courses FROM Courses
+                                              INNER JOIN Enrollments e ON e.course_id = courses.id
+                                              GROUP BY Courses.name ORDER BY Total_Courses DESC");
+
+            $Most_Courses_Series = [];
+            $Most_Courses_Labels = [];
+
+            while ($course = $Most_Courses->fetch_object()) {
+              $Most_Courses_Series[] = $course->Total_Courses;
+              $Most_Courses_Labels[] = $course->name;
+            }
+            ?>
+            <div id="mostCourses"></div>
+          </li> -->
+          <!-- <li class="list">
+            <?php
+            $Most_Student_Enrollments = $connect->query("SELECT u.name, COUNT(e.id) AS Total_Courses FROM enrollments e
+                                                        INNER JOIN users u ON u.id = e.student_id
+                                                        WHERE u.roles = 'student'
+                                                        GROUP BY u.name ORDER BY total_courses DESC");
+
+            $Most_Student_Enrollments_Labels = [];
+            $Most_Student_Enrollments_Series = [];
+
+            while ($enrollment = $Most_Student_Enrollments->fetch_assoc()) {
+              $Most_Student_Enrollments_Series[] = $enrollment['Total_Courses'];
+              $Most_Student_Enrollments_Labels[] = $enrollment['name'];
+            }
+            ?>
+            <div id="mostStudents"></div>
+          </li> -->
+          <li class="list">
+            <?php
+            $chartId = "monthlyReport";
+            $dataUrl = "reports/data/chart_monthly_report.php";
+            $title = "Laporan Pendaftaran Kursus Bulanan";
+            include("./reports/charts/bar.php");
+            ?>
+          </li>
+          <li class="list">
+            <?php
+            $chartId = "yearlyReport";
+            $dataUrl = "reports/data/chart_yearly_report.php";
+            $title = "Laporan Pendaftaran Kursus Tahunan";
+            include("./reports/charts/bar.php");
+            ?>
           </li>
         </ul>
       <?php elseif ($_SESSION['roles'] === 'instructor'): ?>
@@ -144,6 +208,40 @@ $is_admin = $_SESSION['roles'] === 'admin' ? TRUE : FALSE;
       </div>
     </div>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <script>
+    var mostCourses = new ApexCharts(document.querySelector("#mostCourses"), {
+      chart: {
+        type: 'bar'
+      },
+      series: [{
+        data: [<?= json_encode($Most_Courses_Labels) ?>]
+      }]
+    });
+
+    mostCourses.render();
+
+    var mostStudents = new ApexCharts(document.querySelector("#mostStudents"), {
+      chart: {
+        type: 'donut'
+      },
+      series: <?= json_encode($Most_Student_Enrollments_Series) ?>,
+      labels: <?= json_encode($Most_Student_Enrollments_Labels) ?>,
+      responsive: [{
+        breakpoint: 480,
+        options: {
+          chart: {
+            width: 300
+          },
+          legend: {
+            position: 'bottom'
+          }
+        }
+      }]
+    });
+
+    mostStudents.render();
+  </script>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   <script src="../assets/js/script.js"></script>
