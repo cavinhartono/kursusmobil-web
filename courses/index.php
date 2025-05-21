@@ -68,11 +68,12 @@ foreach (glob("../components/*.php") as $file) {
 
               header("Location: index.php");
             }
+            $i = 0;
             ?>
             <tbody>
               <?php while ($course = mysqli_fetch_object($Courses)): ?>
                 <tr>
-                  <td><?= $course->id ?></td>
+                  <td><?= ++$i ?></td>
                   <td style="text-transform: capitalize; width:100%"><?= $course->name ?></td>
                   <td style="text-align: right;"><?= $course->duration ?> jam</td>
                   <td style="text-transform: uppercase; text-align: right;"><?= number_format($course->price, 0, ".", ".") ?> IDR</td>

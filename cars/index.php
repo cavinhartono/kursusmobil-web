@@ -67,11 +67,12 @@ foreach (glob("../components/*.php") as $file) {
 
               header("Location: index.php");
             }
+            $i = 0;
             ?>
             <tbody>
               <?php while ($car = mysqli_fetch_object($Cars)): ?>
                 <tr>
-                  <td><?= $car->id ?></td>
+                  <td><?= ++$i ?></td>
                   <td style="text-transform: capitalize"><?= $car->transmission ?></td>
                   <td><?= $car->name ?></td>
                   <td style="text-align: center;"><?= timeAgo($car->created_at) ?></td>
