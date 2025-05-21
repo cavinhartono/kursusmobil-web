@@ -24,7 +24,7 @@ foreach (glob("../components/landingPage/*.php") as $file) {
         <div class="details">
           <h1 class="title"><?= $course->name ?></h1>
           <h2 class="subtitle"><?= number_format($course->price, 0) ?> IDR</h2>
-          <a href="courses/view.php?id=<?= $course->id ?>" class="btn primary">Belajar Sekarang</a>
+          <a href="./view.php?id=<?= $course->id ?>" class="btn primary">Belajar Sekarang</a>
         </div>
       </li>
     <?php endwhile ?>
