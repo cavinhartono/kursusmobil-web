@@ -7,23 +7,19 @@ include_once('tcpdf/tcpdf.php');
 $certification = new TCPDF('L', 'mm', 'A4', true, 'UTF-8', true);
 $certification->setTitle('Certificate of Courses Indonesia Mandiri');
 $certification->AddPage();
-$certification->setFont('dejavusans', '', 24);
+$certification->setFont('dejavusans', '', 16);
 
-// if (isset($_POST['submit'])) {
-$user_id = $_GET['user'];
-$instuctor_id = $_GET['instructor'];
-$course_id = $_GET['course'];
+if ($_GET['download'] === 'active') {
+  $user_id = $_SESSION['auth'];
+  $instuctor_id = $_GET['instructor'];
+  $course_id = $_GET['course'];
 
-$course = $connect->query("SELECT name FROM Courses WHERE id = $course_id")->fetch_object();
-$user = $connect->query("SELECT name, email FROM Users WHERE id = $user_id")->fetch_object();
-$instuctor = $connect->query("SELECT name, email FROM Users WHERE id = $instuctor_id AND roles = 'instructor'")->fetch_object() ?? null;
-// Final Result = (Quiz X 20%) + (Ujian Praktek X 80%)
-$quiz = $connect->query("SELECT (SUM(score) / SUM(total) * 100) AS result FROM quiz_results 
-                                  WHERE user_id = $user_id AND course_id = $course_id")->fetch_object();
+  $course = $connect->query("SELECT name FROM Courses WHERE id = $course_id")->fetch_object();
+  $user = $connect->query("SELECT name, email FROM Users WHERE id = $user_id")->fetch_object();
+  $instructor = $connect->query("SELECT name, email FROM Users WHERE id = $instuctor_id AND roles = 'instructor'")->fetch_object() ?? null;
+  $get_created_at = $connect->query("SELECT created_at FROM Certifications WHERE id = $_GET[certificated]")->fetch_object()->created_at;
+  $date = date("l, d F Y", strtotime($get_created_at));
 
-$is_create_certification = $user && $instuctor && $course;
-
-if ($is_create_certification) {
   $certification->writeHTML("
     <style>
       * {
@@ -40,17 +36,18 @@ if ($is_create_certification) {
     <p> has successfully completed the </p>
     <h2> $course->name </h2>
     <p> Dibimbing oleh </p>
-    <h2> $instuctor->name </h2>
-    <p> on Hari ini </p>
+    <h2> $instructor->name </h2>
+    <p> on $date </p>
   ");
 }
-// }
 ob_end_clean();
 
-// $certification->Output("$course->name.pdf", 'D');
+$certification->Output("$course->name.pdf", 'D');
+
+header("Location: ./my_list.php");
 ?>
 
-<body>
+<!-- <body>
   <?php if ($is_create_certification): ?>
     <h1 style='text-align: center'> Certificate of Courses Indonesia Mandiri </h1>
     <p style='text-align: center'> This certifies that </p>
@@ -63,4 +60,4 @@ ob_end_clean();
   <?php else: ?>
     <h2>Tidak dapat dibuat sertifikat tersebut</h2>
   <?php endif ?>
-</body>
+</body> -->

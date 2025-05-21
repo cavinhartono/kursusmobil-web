@@ -21,7 +21,7 @@
         <a href="/courses/index.php" class="link <?= str_contains($current, '/courses') ? 'active' : '' ?>"><ion-icon name="book-outline"></ion-icon> Kursus</a>
         <a href="/cars/index.php" class="link <?= str_contains($current, '/cars') ? 'active' : '' ?>"><ion-icon name="car-sport-outline"></ion-icon> Mobil</a>
       </div>
-      <a href="/reports.php" class="link <?= str_contains($current, '/reports') ? 'active' : '' ?>"><ion-icon name="copy-outline"></ion-icon> Laporan</a>
+      <a href="/reports/index.php" class="link <?= str_contains($current, '/reports') ? 'active' : '' ?>"><ion-icon name="copy-outline"></ion-icon> Laporan</a>
     <?php elseif ($_SESSION['roles'] === "instructor"): ?>
       <a href="/schedules/index.php" class="link <?= str_contains($current, '/schedules') ? 'active' : '' ?>"><ion-icon name="time-outline"></ion-icon> Jadwal Penilaian</a>
     <?php else: ?>
