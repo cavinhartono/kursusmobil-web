@@ -10,7 +10,7 @@ $Reports = $connect->query("SELECT Users.name AS user_name, Courses.name AS cour
 $i = 0;
 ?>
 
-<?php if (!empty($Reports)): ?>
+<?php if (mysqli_num_rows($Reports) > 0): ?>
   <?php while ($report = $Reports->fetch_object()): ?>
     <tr style="width: 100%">
       <td><?= ++$i ?></td>
@@ -19,6 +19,7 @@ $i = 0;
       <td align="center"><?= timeAgo($report->created_at) ?></td>
     </tr>
   <?php endwhile ?>
+  <a href="./export_pdf.php?calender=<?= $calender ?>" class="btn primary" style="margin-top: 24px;">Export</a>
 <?php else: ?>
   <tr>
     <td colspan="4">Tidak ada</td>

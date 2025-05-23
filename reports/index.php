@@ -22,9 +22,9 @@ foreach (glob("../components/*.php") as $file) {
     <div class="content-body">
       <div class="container">
         <div action="" class="inputBx">
-          <div class="fillter">
+          <div class="fillter" style="display: flex; gap: 8px">
             <input type="date" id="calender">
-            <button type="button" onclick="getReport()">Cari</button>
+            <button type="button" onclick="getReport()" class="btn primary">Cari</button>
           </div>
           <input type="text" id="searchInput" placeholder="Pencarian Nama">
         </div>
