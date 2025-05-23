@@ -22,7 +22,7 @@ $Transactions = $connect->query("SELECT Courses.Name AS 'course', Users.name AS 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mantau Transaksi</title>
-  <link rel="stylesheet" href="./assets/css/style.css" />
+  <link rel="stylesheet" href="./assets/css/dashboard/style.css" />
 </head>
 
 <body>
