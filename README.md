@@ -25,44 +25,39 @@ Anggota:
       <td>-</td>
     </tr>
     <tr>
-      <td>-</td>
+      <td>&check;</td>
       <td>Sistem Pembayaran (Transfer Only)</td>
       <td>-</td>
     </tr>
     <tr>
-      <td>-</td>
+      <td>&check;</td>
       <td>Ujian Teori</td>
       <td>-</td>
     </tr>
     <tr>
-      <td>-</td>
+      <td>&check;</td>
       <td>Sistem Penjadwalan</td>
       <td>-</td>
     </tr>
     <tr>
-      <td>-</td>
-      <td>Sistem Pembayaran (Transfer Only)</td>
+      <td>&check;</td>
+      <td>Sistem Pembelajaran</td>
       <td>-</td>
     </tr>
     <tr>
-      <td>-</td>
+      <td>&check;</td>
       <td>Sertifikat</td>
       <td>-</td>
     </tr>
     <tr>
-      <td>-</td>
+      <td>&check;</td>
       <td>Sistem Penilaian berdasarkan Nilai Ujian</td>
       <td>-</td>
     </tr>
     <tr>
-      <td>-</td>
+      <td>&check;</td>
       <td>Roles</td>
       <td>`Admin`, `Instruktur` dan `Siswa`</td>
-    </tr>
-    <tr>
-      <td>-</td>
-      <td>Responsive</td>
-      <td>-</td>
     </tr>
   </tbody>
 </table>
@@ -80,13 +75,37 @@ Anggota:
   </thead>
   <tbody>
     <tr>
-      <td>CRUD (Students dan Instructors)</td>
+      <td>Dashboard</td>
+      <td>&check;</td>
+      <td>&check;</td>
+      <td>&check;</td>
+    </tr>
+    <tr>
+      <td>CRUD (Students, Instructors, Courses dan Cars)</td>
       <td>&check;</td>
       <td>-</td>
       <td>-</td>
     </tr>
     <tr>
-      <td>CRUD (Courses dan Cars)</td>
+      <td>Mantau Transaksi</td>
+      <td>&check;</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>Laporan</td>
+      <td>&check;</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>Ujian Digitalisasi (Instructor)</td>
+      <td>-</td>
+      <td>&check;</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>Menentukan Jadwal</td>
       <td>-</td>
       <td>&check;</td>
       <td>-</td>
@@ -111,3 +130,31 @@ Anggota:
     </tr>
   </tbody>
 </table>
+
+Tambahan:
+
+- Penilaian:
+
+Ujian Teori: Quiz (20%)
+
+Ujian Pratik: Dari Instruktur (80%)
+
+IF (> 75): A, B, C -> Lulus
+ELSE (< 60): D -> Tidak Lulus
+
+- Sertifikat:
+
+dari Penilaian
+
+Akun Percobaan:
+
+```
+Admin:
+admin@mail.com - password: 1
+
+Instructor:
+ginaananda77@email.com - password: ananda123
+
+User:
+kevin@gmail.com - password: kevin
+```

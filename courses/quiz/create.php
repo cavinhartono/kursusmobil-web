@@ -19,7 +19,7 @@ $course = $connect->query("SELECT name FROM Courses WHERE id = $course_id")->fet
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Buat Kuis - <?= $course->name ?></title>
-  <link rel="stylesheet" href="../../assets/css/style.css" />
+  <link rel="stylesheet" href="../../assets/css/dashboard/style.css" />
   <style>
     .action {
       display: flex;
