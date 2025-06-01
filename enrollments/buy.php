@@ -19,9 +19,9 @@ $Course = mysqli_query(
     WHERE id = $course_id"
 )->fetch_object();
 
-// $connect->query(
-//   "INSERT INTO Orders(user_id, course_id) VALUES ($user_id, $course_id)"
-// );
+$connect->query(
+  "INSERT INTO Orders(user_id, course_id) VALUES ($user_id, $course_id)"
+);
 
 ?>
 
@@ -48,9 +48,12 @@ $Course = mysqli_query(
     <p>Nomor Telepon: <?= $User->phone ?></p>
     <div id="display" style="display: none;"></div>
     <form method="POST" action="pay.php">
+      <input type="hidden" name="user_id" value="<?= $user_id ?>">
+      <input type="hidden" name="course_id" value="<?= $course_id ?>">
       <select name="metode" id="metode" onchange="toggleMetode()" required>
         <option value="">-- Pilih --</option>
-        <option value="debit" selected>Kartu Debit</option>
+        <option value="debit">Kartu Debit</option>
+        <option value="qris">QRIS</option>
       </select>
 
       <div id="debit" style="display:none;">
