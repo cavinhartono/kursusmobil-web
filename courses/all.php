@@ -58,8 +58,8 @@ foreach (glob("../components/landingPage/*.php") as $file) {
       <?php $i = 0; ?>
       <?php while ($course = mysqli_fetch_object($Courses)): ?>
         <li class="list">
-          <h1 class="supertitle"><?= ++$i ?></h1>
           <a href="./view.php?id=<?= $course->id ?>">
+            <h1 class="supertitle"><?= ++$i ?></h1>
             <h1 class="title"><?= $course->name ?></h1>
             <p><?= number_format($course->price, 0) ?> IDR</p>
           </a>

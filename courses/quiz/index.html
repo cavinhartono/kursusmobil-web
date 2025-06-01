@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../assets/css/quiz/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="action">
+        <a href="">Kembali</a>
+        <p>Kuis Pertama</p>
+        <div id="timer" style="font-weight: bold; color: darkblue">05:00</div>
+      </div>
+      <form action="">
+        <div class="question">
+          <p><b>Apakah yang dimaksud dengan mobil?</b></p>
+          <div class="choice">
+            <label for="answer 1"> Mobil adalah kendaraan </label>
+            <input type="radio" id="answer 1" value="1" />
+          </div>
+          <div class="choice">
+            <label for="answer 2"> Car is vehicle </label>
+            <input type="radio" id="answer 2" value="2" />
+          </div>
+          <div class="choice">
+            <label for="answer"> ndak tau </label>
+            <input type="radio" id="answer" />
+          </div>
+          <div class="choice">
+            <label> cuek aja </label>
+            <input type="radio" />
+          </div>
+        </div>
+        <div class="question">
+          <p><b>Anda sehat?</b></p>
+          <div class="choice">
+            <input type="radio" />
+            <label> Stress </label>
+          </div>
+          <div class="choice">
+            <input type="radio" />
+            <label> Dikit </label>
+          </div>
+          <div class="choice">
+            <input type="radio" />
+            <label> Alhamdulillah </label>
+          </div>
+          <div class="choice">
+            <input type="radio" />
+            <label> Sehat Banget </label>
+          </div>
+        </div>
+      </form>
+    </div>
+    <script>
+      // Countdown 5 minutes
+      let time = 5 * 60;
+      const timer = document.getElementById("timer");
+
+      const countdown = setInterval(() => {
+        const minutes = Math.floor(time / 60);
+        const seconds = time % 60;
+        timer.innerHTML = `${String(minutes).padStart(2, "0")}:${String(
+          seconds
+        ).padStart(2, "0")}`;
+        time--;
+
+        if (time < 0) {
+          clearInterval(countdown);
+          alert("Waktu habis! Quiz akan dikumpulkan otomatis.");
+          document.querySelector("form").submit();
+        }
+      }, 1000);
+    </script>
+  </body>
+</html>
